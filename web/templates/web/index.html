@@ -1,0 +1,170 @@
+{% extends 'web/base.html' %} 
+{% load static %}       
+{% block contenido_body %}
+        
+        <!--banner logo + carrusel-->
+        <section class="container">
+            <div class="row mt-3 align-items-center">
+                <div class="col-xs-12 col-md-6">
+                    <div>
+                        <img class="w-100" src="{% static 'web/img/logo banner.png'%}" alt="logo">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 d-flex justify-content-center"> <!--Carrusel-->
+                    <div>
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active ">
+                                <video class="video-fluid d-block w-100 rounded" autoplay muted loop src="{% static 'web/video/cueca1.mp4'%}" type=""></video>
+                              </div>
+                              <div class="carousel-item">
+                                <video class="video-fluid d-block w-100 rounded" autoplay muted loop src="{% static 'web/video/cueca2.mp4'%}" type=""></video>
+                              </div>
+                            </div>
+                          </div>                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--separador-->
+        <div class="border-top"></div>
+
+
+        <!--Banner campeonato nacional-->
+        <div class="row mt-3">
+            <div class="contenedor-titulo h-auto d-inline-block ">
+              <div class="col text-center">
+                <img class="img-fluid" src="{% static 'web/img/banner titulo campeonato.png' %}" alt="titulo-camp" width="650">
+              </div>
+            </div>
+        </div> 
+
+
+        <!--pais-->
+        <section class="container">
+         <div class="row">
+            <div class="col-md-4">
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="arica" class="me-3" src="{% static 'web/img/arica y parin.png' %}" alt="arica">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="tarapaca" src="{% static 'web/img/tarapaca.png' %}" alt="tarapaca">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="antofa" class="ms-4" src="{% static 'web/img/antofagasta.png' %}" alt="antofa">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="atacama" class="ms-3" src="{% static 'web/img/atacama.png' %}" alt="atacama">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="coquimbo" class="ms-1 mt-1" src="{% static 'web/img/coquimbo.png' %}" alt="coquimbo">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="valpo" class="ms-1" src="{% static 'web/img/VALPO.png' %}" alt="valpo">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="rm" class="ms-4" src="{% static 'web/img/rm.png' %}" alt="rm">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="ohiggins" class="ms-2 mt-2" src="{% static 'web/img/ohiggins.png' %}" alt="ohiggins">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="maule" class="mt-2" src="{% static 'web/img/maule.png' %}" alt="maule">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="nuble" class="mt-1" src="{% static 'web/img/nuble.png' %}" alt="nuble">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="biobio" class="mt-1" src="{% static 'web/img/biobio.png' %}" alt="biobio">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="araucania" class="ms-2" src="{% static 'web/img/araucania.png' %}" alt="araucania">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="los_rios" class="mt-1" src="{% static 'web/img/losrios.png' %}" alt="los_rios">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="los_lagos" class="mt-1" src="{% static 'web/img/los_lagos.png' %}" alt="los_lagos">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="aysen" class="" src="{% static 'web/img/aysen.png' %}" alt="aysen">
+                </div>
+                <div id="region" class="row justify-content-center align-items-center ">
+                    <img id="magallanes" class="" src="{% static 'web/img/magallanes.png' %}" alt="magallanes">
+                </div>
+            </div>
+            <div class="col-8">
+
+            </div>
+         </div>
+
+
+         <!--separador-->
+         <div class="border-top mt-5"></div>
+
+
+         <!--Banner campeonato nacional-->
+         <div class="row mt-3">
+             <div class="contenedor-titulo h-auto d-inline-block ">
+               <div class="col text-center">
+                 <img class="img-fluid mt-2" src="{% static 'web/img/eventos campeonato.png' %}" alt="event-camp" width="650">
+               </div>
+             </div>
+         </div> 
+        </section>
+
+        <div class="row d-flex justify-content-evenly">
+          <!--first new-->
+            <div class="col-md-4 noticia mt-5">
+                <img class="img-fluid" src="{{ first_noticia.imagenEncabezado.url }}" alt="pareja1">
+                <h2 class="fw-bold m-0">{{first_noticia.titulo}}</h2>
+                <p class="fw-bold">{{first_noticia.fecha}}</p>
+                <p>{{first_noticia.descripcion}}</p>
+            </div>
+          <!--end first new-->
+          <!--old news-->
+          
+            <div class="col-sm-12 col-md-5 col-xl-4">
+              <div class="row">
+                {% for news in old_noticia %}
+                <div class="col-md-12 noticia mt-5">
+                  <img class="img-fluid old_news" src="{{ news.imagenEncabezado.url }}" alt="pareja1">
+                  <h4 class="fw-bold m-0">{{news.titulo}}</h4>
+                  <p class="fw-bold">{{news.fecha}}</p>
+                  <div class=" d-flex flex-nowrap">
+                    <p>{{news.descripcion}}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          <!--end old news-->
+        </div>
+
+        <!--separador-->
+        <div class="border-top mt-5"></div>
+
+
+        <!--Banner campeonato nacional-->
+        <div class="row mt-3">
+            <div class="contenedor-titulo h-auto d-inline-block ">
+              <div class="col text-center">
+                <img class="img-fluid" src="{% static 'web/img/titulo_bases.png' %}" alt="event-camp" width="650">
+              </div>
+            </div>
+        </div> 
+
+        <section class="container">
+          <div class="row p-0">
+            <div class="col-md-5">
+              <img class="img-fluid" src="{% static 'web/img/bases.png' %}" alt="pareja_bases">
+            </div>
+            <div class="col-md-6 d-flex align-items-center flex-wrap">
+                <p class="fs-2 text-center fst-italic">Conoce nuestras bases en nuestro pdf</p>
+                <a class="btn btn-warning" target="_blank" type="button" href="{% static 'wen/pdf/BASES2024HQ_compressed.pdf' %}" >Ver bases del campeonato</a>
+            </div>
+          </div>
+        </section>
+
+{% endblock %}

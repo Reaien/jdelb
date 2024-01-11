@@ -1,0 +1,88 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+#arica{
+    width: 4rem;
+}
+
+#tarapaca{
+    width: 6rem;
+}
+
+#antofa{
+    width: 8rem;
+}
+
+#atacama{
+    width: 7rem;
+}
+
+#coquimbo{
+    width: 4rem;
+}
+#valpo{
+    width: 5rem;
+}
+#rm{
+    width: 4rem;
+}
+#ohiggins{
+    width: 4rem;
+}
+#maule{
+    width: 4rem;
+}
+#nuble{
+    width: 4rem;
+}
+#biobio{
+    width: 4rem;
+}
+#araucania{
+    width: 4rem;
+}
+#los_rios{
+    width: 3.5rem;
+}
+#los_lagos{
+    width: 4.5rem;
+}
+#aysen{
+    width: 6rem;
+}
+#magallanes{
+    width: 15rem;
+    margin-left: 8.5rem;
+}
+#region img{
+    transition: all 300ms ease;
+}
+#region img:hover{
+    background-blend-mode: soft-light;
+    transform: scale(1.1);
+}
+
+@media (min-width:768px) {
+    .old_news{
+        width: 250px;
+    }
+}
+
+
+
+
+.noticia:hover h2 {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.noticia:hover{
+    cursor: pointer;
+}
+
+.noticia:hover h4 {
+    text-decoration: underline;
+    
+}
+

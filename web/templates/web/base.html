@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+    <title>Jovenes del bicentenario</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <!--Barra superior iconos-->
+        <section class="row p-1 bg-dark p-3">
+            <div class="col-sx-12 col-md-12 d-flex justify-content-center ">
+                <a class="me-3" href="https://www.instagram.com/jov.bicentenario/"><img src="{% static 'web/img/instagram.png' %}" alt="logo_insta"></a>
+                <a class="me-3" href="https://www.facebook.com/CampeonatoJovenesDelBicentenario"><img src="{% static 'web/img/facebook.png' %}" alt="logo_face"></a>
+                <a class="me-3" href="https://www.tiktok.com/@jov.bicentenario"><img src="{% static 'web/img/gorjeo.png' %}" alt="logo_gorjeo"></a>
+                <a class="me-3" href="https://www.youtube.com/@jov.bicentenario"><img src="{% static 'web/img/youtube.png' %}" alt="logo_youtube"></a>
+            </div>
+        </section>
+        
+
+        <!--navbar-->
+        <section class="row ">
+            <nav class="navbar navbar-expand-lg  ">
+                <div class="container-fluid">
+                    <img src="{% static 'web/img/logo navbar 2.png'%}" alt="logonavbar">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-md-evenly" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                            <a class="nav-link" href="#">Nosotros</a>
+                            <a class="nav-link" href="#">Organización</a>
+                            <a class="nav-link" href="#">Contacto</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </section>
+        
+
+        <!--separador-->
+        <div class="border-top mt-3"></div>
+
+
+        {% block contenido_body %}
+        {% endblock %}
+
+
+        <div class="border-top mt-3"></div>
+
+        <footer class="text-center">
+            <div class="row pt-5 bg-dark text-white mt-5">
+              <div class="col-xs-12 col-md-6 col-lg-4 ">
+                <p class="h3 mt-1">Jovenes Bicentenario<img class="ps-4" src="{% static 'web/img/logo navbar.png'%}" alt="logo-pagina"> </p>
+              </div>
+              <div class="col-xs-12 col-md-4 col-lg-4 mt-4 ">
+                <p class="h5">Redes sociales</p>
+                <a href="#" class="text-white"><img src="{% static 'web/img/facebook.png' %}" alt="logofeis"></a>
+                <a href="#" class="text-white"><img src="{% static 'web/img/instagram.png' %}" alt="logoinsta"></a>
+                <a href="#" class="text-white"><img src="{% static 'web/img/gorjeo.png' %}" alt="logotwitter"></a>
+              </div>
+              <div class="col-xs-12 col-md-4 col-lg-4 mt-4">
+                <p class="h5">Términos legales</p>
+                <div>
+                  <a href="#" class="text-white text-decoration-none">Aviso legal</a>
+                </div>
+                <div>
+                  <a href="#" class="text-white text-decoration-none">Contacto</a>
+                </div>
+              </div>              
+              <div class="pt-5">
+                <p class="h7 pt-5">Todos los derechos reservados Jovenes Bicentenario © </p>
+                <a id="credits" href="https://www.ivanduarteherrera.net" class="text-decoration-none text-white pt-5">Creado por Iván Duarte Herrera</a>
+              </div>
+            </div>
+          </footer>
+
+
+
+        
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

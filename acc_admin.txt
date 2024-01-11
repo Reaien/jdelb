@@ -1,0 +1,2 @@
+user: manu_admin
+pass: manu8525
