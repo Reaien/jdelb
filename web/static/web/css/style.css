@@ -87,8 +87,8 @@ body{
 }
 
 .fade-in-right {
-	-webkit-animation: fade-in-right 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in-right 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	-webkit-animation: fade-in-right 6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-right 6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
  @-webkit-keyframes fade-in-right {

@@ -7,7 +7,7 @@
             <div class="row align-items-center mt-5">
                 <div class="col-xs-12 col-md-6 mt-3">
                     <div>
-                        <img class="w-100" src="{% static 'web/img/logo banner.png'%}" alt="logo">
+                        <img class="img-fluid mb-5" src="{% static 'web/img/logo banner.png'%}" alt="logo">
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6 d-flex justify-content-center"> <!--Carrusel-->
@@ -28,7 +28,13 @@
         </section>
 
         <!--separador-->
-        <div class="border-top mt-5"></div>
+        <section class="row d-flex justify-content-center  ">
+          <div class="col-8 text-center">
+            <div class="border-top mt-1 border-danger "></div>
+            <div class="border-top mt-1 border-primary "></div>
+          </div>
+        </section>
+
 
 
         <!--Banner campeonato nacional-->
@@ -102,7 +108,7 @@
          </div>
 
 
-         <!--componente de card regional-->
+         <!--componente de card regional
          <div class="row d-flex justify-content-center">
           <div class="col-md-6 text-center mt-5">
             <div class="card">
@@ -129,12 +135,18 @@
               </div>
             </div>
           </div>
-         </div>
+         </div> 
+        -->
          <!--fin componente card regional-->
 
 
-         <!--separador-->
-         <div class="border-top mt-3"></div>
+        <!--separador-->
+        <section class="row d-flex justify-content-center mt-3 ">
+          <div class="col-8 text-center">
+            <div class="border-top mt-1 border-danger "></div>
+            <div class="border-top mt-1 border-primary "></div>
+          </div>
+        </section>
 
 
          <!--Banner campeonato nacional-->
@@ -158,10 +170,10 @@
           <!--end first new-->
           <!--old news-->
           
-            <div class="col-sm-12 col-md-5 col-xl-4">
+            <div class="col-sm-12 col-md-5">
               <div class="row">
                 {% for news in old_noticia %}
-                <div class="col-md-12 noticia mt-5">
+                <div class="col-md-6 noticia mt-5">
                   <img class="img-fluid old_news" src="{{ news.imagenEncabezado.url }}" alt="pareja1">
                   <h4 class="fw-bold m-0">{{news.titulo}}</h4>
                   <p class="fw-bold">{{news.fecha}}</p>
@@ -176,11 +188,16 @@
         </div>
 
         <!--separador-->
-        <div class="border-top mt-5"></div>
+        <section class="row d-flex justify-content-center  ">
+          <div class="col-8 text-center">
+            <div class="border-top mt-1 border-danger "></div>
+            <div class="border-top mt-1 border-primary "></div>
+          </div>
+        </section>
 
 
         <!--Banner campeonato nacional-->
-        <div class="row mt-3">
+        <div class="row ">
             <div class="contenedor-titulo h-auto d-inline-block ">
               <div class="col text-center">
                 <img class="img-fluid" src="{% static 'web/img/titulo_bases.png' %}" alt="event-camp" width="650">
