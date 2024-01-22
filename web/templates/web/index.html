@@ -51,52 +51,52 @@
         <section class="container">
          <div class="row">
             <div id="pais_chile" class="col-md-4">
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="arica" class="me-3" src="{% static 'web/img/arica y parin.png' %}" alt="arica">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="tarapaca" src="{% static 'web/img/tarapaca.png' %}" alt="tarapaca">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="antofa" class="ms-4" src="{% static 'web/img/antofagasta.png' %}" alt="antofa">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="atacama" class="ms-3" src="{% static 'web/img/atacama.png' %}" alt="atacama">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="coquimbo" class="ms-1 mt-1" src="{% static 'web/img/coquimbo.png' %}" alt="coquimbo">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="valpo" class="ms-1" src="{% static 'web/img/VALPO.png' %}" alt="valpo">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="rm" class="ms-4" src="{% static 'web/img/rm.png' %}" alt="rm">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="ohiggins" class="ms-2 mt-2" src="{% static 'web/img/ohiggins.png' %}" alt="ohiggins">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="maule" class="mt-2" src="{% static 'web/img/maule.png' %}" alt="maule">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="nuble" class="mt-1" src="{% static 'web/img/nuble.png' %}" alt="nuble">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="biobio" class="mt-1" src="{% static 'web/img/biobio.png' %}" alt="biobio">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="araucania" class="ms-2" src="{% static 'web/img/araucania.png' %}" alt="araucania">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="los_rios" class="mt-1" src="{% static 'web/img/losrios.png' %}" alt="los_rios">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="los_lagos" class="mt-1" src="{% static 'web/img/los_lagos.png' %}" alt="los_lagos">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="aysen" class="" src="{% static 'web/img/aysen.png' %}" alt="aysen">
                 </div>
-                <div id="region" class="row justify-content-center align-items-center ">
+                <div class="row justify-content-center align-items-center region">
                     <img id="magallanes" class="" src="{% static 'web/img/magallanes.png' %}" alt="magallanes">
                 </div>
             </div>
@@ -108,35 +108,37 @@
          </div>
 
 
-         <!--componente de card regional
-         <div class="row d-flex justify-content-center">
-          <div class="col-md-6 text-center mt-5">
-            <div class="card">
-              <div class="card-body bg-light bg-gradient">
-                <div class="row">
-                  <div class="col-12">
-                    <h4 class="fw-bold">Delegado Regional</h4>
-                    <h5 class="text-warning fw-bold">Tarapacá</h5>
-                    <img class="rounded-circle img-fluid w-25" src="../../static/web/img/delegado.png" alt="delegado">
-                    <p class="fw-bold mt-1">Elsa Zarricueta Huerta</p>
-                    <p class="fw-bold">Correo: delegado@jdelb.cl</p>
-                  </div>
-                  <div class="col-6 ps-0 pe-0">
-                    <h4 class="fw-bold">Competidor <span class="text-warning">Regional</span></h4>
-                    <img class="rounded-circle img-fluid w-25" src="../../static/web/img/pareja_hombre.png" alt="delegado">
-                    <p class="fw-bold mt-1">Rodrigo Zapata Puesto</p>
-                  </div>
-                  <div class="col-6 ps-0 pe-0">
-                    <h4 class="fw-bold">Competidora <span class="text-warning">Regional</span></h4>
-                    <img class="rounded-circle img-fluid w-25" src="../../static/web/img/pareja_mujer.png" alt="delegado">
-                    <p class="fw-bold mt-1">Josefa Gonzalez Huerta</p>
+         <!--componente de card regional        -->
+        <section id="cardDelegado" class="cardDelegado">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-6 text-center mt-5">
+              <div class="card">
+                <div class="card-body bg-light bg-gradient">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="fw-bold">Delegado Regional</h4>
+                      <h5 class="text-warning fw-bold">Tarapacá</h5>
+                      <img class="rounded-circle img-fluid w-25" src="../../static/web/img/delegado.png" alt="delegado">
+                      <p class="fw-bold mt-1">Elsa Zarricueta Huerta</p>
+                      <p class="fw-bold">Correo: delegado@jdelb.cl</p>
+                    </div>
+                    <div class="col-6 ps-0 pe-0">
+                      <h4 class="fw-bold">Competidor <span class="text-warning">Regional</span></h4>
+                      <img class="rounded-circle img-fluid w-25" src="../../static/web/img/pareja_hombre.png" alt="delegado">
+                      <p class="fw-bold mt-1">Rodrigo Zapata Puesto</p>
+                    </div>
+                    <div class="col-6 ps-0 pe-0">
+                      <h4 class="fw-bold">Competidora <span class="text-warning">Regional</span></h4>
+                      <img class="rounded-circle img-fluid w-25" src="../../static/web/img/pareja_mujer.png" alt="delegado">
+                      <p class="fw-bold mt-1">Josefa Gonzalez Huerta</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-         </div> 
-        -->
+          </div> 
+        </section>
+
          <!--fin componente card regional-->
 
 

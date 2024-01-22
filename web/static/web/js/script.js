@@ -30,3 +30,17 @@ const idChile = document.getElementById('pais_chile');
 const idPareja = document.getElementById('cuequeros');
 observer.observe(idChile);
 observer.observe(idPareja);
+//end observer pareja
+
+//animacion region 
+const cardDelegado = document.getElementById('cardDelegado');
+const region = document.getElementById('region');
+
+region.addEventListener('mouseover', function(){
+    cardDelegado.style.display= 'block';
+});
+
+region.addEventListener('mouseout', function(){
+    cardDelegado.style.display= 'none';
+});
+
