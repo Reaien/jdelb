@@ -1,5 +1,5 @@
 //fx para verificar si un elemento está en el area visible de la pantalla
-console.log('hola desde el js')
+
 
 // Configuración del Intersection Observer
 const opcionesObserver = {
@@ -33,14 +33,18 @@ observer.observe(idPareja);
 //end observer pareja
 
 //animacion region 
-const cardDelegado = document.getElementById('cardDelegado');
-const region = document.getElementById('region');
 
-region.addEventListener('mouseover', function(){
-    cardDelegado.style.display= 'block';
-});
+//const cardDelegado = document.getElementById('cardDelegado');
+//const regiones = document.getElementsByClassName('region');
 
-region.addEventListener('mouseout', function(){
-    cardDelegado.style.display= 'none';
-});
+//for (let index = 0; index < regiones.length; index++) {
+//    regiones[index].addEventListener('mouseover', function(){
+//        cardDelegado.style.display= 'block';
+//        idPareja.style.display= 'none';
+//    });
+//    regiones[index].addEventListener('mouseout', function(){
+//        cardDelegado.style.display= 'none';
+//        idPareja.style.display= 'block';
+//    });
+//}
 

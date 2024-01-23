@@ -16,3 +16,21 @@ class Noticia(models.Model):
 
     def __str__(self):
         return self.titulo  
+    
+class Regiones(models.Model):
+    nombreRegion = models.CharField(max_length=50, null=True)
+    nombreCompletoDelegado = models.CharField(max_length=100, null=True)
+    correoDelegado = models.CharField(max_length=150, null=True)
+    fotoDelegado = models.ImageField(upload_to="images", null=True, blank=True)
+    nombreCompletoCompetidor = models.CharField(max_length=100, null=True)
+    fotoCompetidor = models.ImageField(upload_to="images", null=True, blank=True)
+    nombreCompletoCompetidora = models.CharField(max_length=100, null=True)
+    fotoCompetidora = models.ImageField(upload_to="images", null=True, blank=True)
+    imagenRegion = models.ImageField(upload_to="images", null=True)
+
+    class Meta:
+        db_table = 'Regiones'
+
+    def __str__(self):
+        return self.nombreRegion
+    

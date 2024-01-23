@@ -51,95 +51,59 @@
         <section class="container">
          <div class="row">
             <div id="pais_chile" class="col-md-4">
-                <div class="row justify-content-center align-items-center region">
-                    <img id="arica" class="me-3" src="{% static 'web/img/arica y parin.png' %}" alt="arica">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="tarapaca" src="{% static 'web/img/tarapaca.png' %}" alt="tarapaca">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="antofa" class="ms-4" src="{% static 'web/img/antofagasta.png' %}" alt="antofa">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="atacama" class="ms-3" src="{% static 'web/img/atacama.png' %}" alt="atacama">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="coquimbo" class="ms-1 mt-1" src="{% static 'web/img/coquimbo.png' %}" alt="coquimbo">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="valpo" class="ms-1" src="{% static 'web/img/VALPO.png' %}" alt="valpo">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="rm" class="ms-4" src="{% static 'web/img/rm.png' %}" alt="rm">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="ohiggins" class="ms-2 mt-2" src="{% static 'web/img/ohiggins.png' %}" alt="ohiggins">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="maule" class="mt-2" src="{% static 'web/img/maule.png' %}" alt="maule">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="nuble" class="mt-1" src="{% static 'web/img/nuble.png' %}" alt="nuble">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="biobio" class="mt-1" src="{% static 'web/img/biobio.png' %}" alt="biobio">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="araucania" class="ms-2" src="{% static 'web/img/araucania.png' %}" alt="araucania">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="los_rios" class="mt-1" src="{% static 'web/img/losrios.png' %}" alt="los_rios">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="los_lagos" class="mt-1" src="{% static 'web/img/los_lagos.png' %}" alt="los_lagos">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="aysen" class="" src="{% static 'web/img/aysen.png' %}" alt="aysen">
-                </div>
-                <div class="row justify-content-center align-items-center region">
-                    <img id="magallanes" class="" src="{% static 'web/img/magallanes.png' %}" alt="magallanes">
-                </div>
+                {% for info_regiones in info_regiones %}
+                <a class="row justify-content-center align-items-center animacion_region">
+                    <img id="arica" class="me-3 region" src="{{ info_regiones.imagenRegion.url }}" alt="arica"  data-bs-toggle="modal" data-bs-target="#miModal{{info_regiones.pk}}">
+                </a>
+                {% endfor %}
             </div>
-            <div class="col-md-8 mt-5">
-              <div id="cuequeros">
-                <img class="img-fluid " src="{% static 'web/img/pareja_index.png' %}" alt="">
-              </div>
-            </div>
-         </div>
-
-
-         <!--componente de card regional        -->
-        <section id="cardDelegado" class="cardDelegado">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-6 text-center mt-5">
-              <div class="card">
-                <div class="card-body bg-light bg-gradient">
-                  <div class="row">
-                    <div class="col-12">
-                      <h4 class="fw-bold">Delegado Regional</h4>
-                      <h5 class="text-warning fw-bold">Tarapacá</h5>
-                      <img class="rounded-circle img-fluid w-25" src="../../static/web/img/delegado.png" alt="delegado">
-                      <p class="fw-bold mt-1">Elsa Zarricueta Huerta</p>
-                      <p class="fw-bold">Correo: delegado@jdelb.cl</p>
-                    </div>
-                    <div class="col-6 ps-0 pe-0">
-                      <h4 class="fw-bold">Competidor <span class="text-warning">Regional</span></h4>
-                      <img class="rounded-circle img-fluid w-25" src="../../static/web/img/pareja_hombre.png" alt="delegado">
-                      <p class="fw-bold mt-1">Rodrigo Zapata Puesto</p>
-                    </div>
-                    <div class="col-6 ps-0 pe-0">
-                      <h4 class="fw-bold">Competidora <span class="text-warning">Regional</span></h4>
-                      <img class="rounded-circle img-fluid w-25" src="../../static/web/img/pareja_mujer.png" alt="delegado">
-                      <p class="fw-bold mt-1">Josefa Gonzalez Huerta</p>
+            <div id="col-pareja-card" class="col-md-7 mt-5">
+              <!--card de delegados y parejas-->
+              {% for info_regiones in info_regiones %}
+              <div class="mt-5 pt-2 modal fade" id="miModal{{info_regiones.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <div class="card slide-in-fwd-center ">
+                        <div class="card-body bg-light bg-gradient">
+                          <div class="row ">
+                            <div class="col-12 text-center">
+                              <h4 class="fw-bold">Delegado Regional</h4>
+                              <h5 class="text-warning fw-bold">{{info_regiones.nombreRegion}}</h5>
+                              <img class="rounded-circle img-fluid w-25" src="{{info_regiones.fotoDelegado.url}}" alt="delegado">
+                              <p class="fw-bold mt-1">{{info_regiones.nombreCompletoDelegado}}</p>
+                              <p class="fw-bold">{{info_regiones.correoDelegado}}</p>
+                            </div>
+                            <div class="col-6 ps-0 pe-0 text-center">
+                              <h4 class="fw-bold">Competidor <span class="text-warning">Regional</span></h4>
+                              <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidor.url}}" alt="delegado">
+                              <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
+                            </div>
+                            <div class="col-6 ps-0 pe-0 text-center">
+                              <h4 class="fw-bold">Competidora <span class="text-warning">Regional</span></h4>
+                              <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidora.url}}" alt="delegado">
+                              <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div> 
-        </section>
+              {% endfor %}
+              <!--card de delegados y parejas-->
 
-         <!--fin componente card regional-->
+              <!--cuequeros campeones-->
+              <div id="cuequeros">
+                <img class="img-fluid " src="{% static 'web/img/pareja_index.png' %}" alt="">
+                <h5 class="fst-italic ps-5 ms-5">Campeones Nacionales - 2023</h5>
+              </div>
+              <!-- fin cuequeros campeones-->
+            </div>
+         </div>
+
+
 
 
         <!--separador-->

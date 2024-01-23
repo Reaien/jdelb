@@ -55,10 +55,10 @@ body{
     width: 15rem;
     margin-left: 8.5rem;
 }
-#region img{
+.animacion_region img{
     transition: all 300ms ease;
 }
-#region img:hover{
+.animacion_region img:hover{
     background-blend-mode: soft-light;
     transform: scale(1.1);
 }
@@ -69,9 +69,7 @@ body{
     }
 }
 
-.cardDelegado{
-    display: none;
-}
+
 
 
 
@@ -90,8 +88,8 @@ body{
 }
 
 .fade-in-right {
-	-webkit-animation: fade-in-right 6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in-right 6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	-webkit-animation: fade-in-right 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-right 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
  @-webkit-keyframes fade-in-right {
@@ -120,8 +118,8 @@ body{
   }
   
 .fade-in {
-    -webkit-animation: fade-in 5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-            animation: fade-in 5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 
@@ -142,3 +140,36 @@ body{
     }
 }
   
+
+.slide-in-fwd-center {
+    -webkit-animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-fwd-center {
+    0% {
+        -webkit-transform: translateZ(-1400px);
+        transform: translateZ(-1400px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-fwd-center {
+    0% {
+        -webkit-transform: translateZ(-1400px);
+        transform: translateZ(-1400px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1;
+    }
+}
