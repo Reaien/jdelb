@@ -3,57 +3,12 @@ body{
 }
 
 #arica{
-    width: 4rem;
-}
-
-#tarapaca{
-    width: 6rem;
-}
-
-#antofa{
-    width: 8rem;
-}
-
-#atacama{
-    width: 7rem;
-}
-
-#coquimbo{
-    width: 4rem;
-}
-#valpo{
-    width: 5rem;
-}
-#rm{
-    width: 4rem;
-}
-#ohiggins{
-    width: 4rem;
-}
-#maule{
-    width: 4rem;
-}
-#nuble{
-    width: 4rem;
-}
-#biobio{
-    width: 4rem;
-}
-#araucania{
-    width: 4rem;
-}
-#los_rios{
-    width: 3.5rem;
-}
-#los_lagos{
     width: 4.5rem;
 }
-#aysen{
-    width: 6rem;
-}
+
 #magallanes{
-    width: 15rem;
-    margin-left: 8.5rem;
+    width: 11rem;
+    margin-left: 6rem;
 }
 .animacion_region img{
     transition: all 300ms ease;
@@ -88,8 +43,8 @@ body{
 }
 
 .fade-in-right {
-	-webkit-animation: fade-in-right 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in-right 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	-webkit-animation: fade-in-right 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-right 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
  @-webkit-keyframes fade-in-right {
@@ -118,8 +73,8 @@ body{
   }
   
 .fade-in {
-    -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-            animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    -webkit-animation: fade-in 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: fade-in 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 
@@ -172,4 +127,8 @@ body{
         transform: translateZ(0);
         opacity: 1;
     }
+}
+
+.logo_envivo{
+    width: 250px;
 }

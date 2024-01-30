@@ -1,6 +1,33 @@
 {% extends 'web/base.html' %} 
 {% load static %}       
 {% block contenido_body %}
+
+
+        <!--Seccion live-->
+        {% if en_vivo.activar_en_vivo %}
+          <section class="row d-flex justify-content-center mt-3">
+            <div class="col-xs-12 col-md-6 mt-3">
+              <div class="text-center">
+                  <img class="img-fluid mb-5" src="{% static 'web/img/titulo_campeonato_vivo.png'%}" alt="logo">
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="text-center ratio ratio-16x9">
+                <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  width="1280" title="Transmisión Oficial Campeonato Nacional Jovenes del Bicentenario" height="720" src="https://www.youtube.com/embed/OMlV3Q9h5rA?si=lpv1uJN45ruq3TZe" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+          </section>
+
+          <!--Seccion live-->
+
+          <!--separador-->
+          <section class="row d-flex justify-content-center mt-3 ">
+            <div class="col-8 text-center">
+              <div class="border-top mt-1 border-danger "></div>
+              <div class="border-top mt-1 border-primary "></div>
+            </div>
+          </section>
+        {% endif %}
         
         <!--banner logo + carrusel-->
         <section class="container">
@@ -38,7 +65,7 @@
 
 
         <!--Banner campeonato nacional-->
-        <div class="row ">
+        <div class="row mt-5">
             <div class="contenedor-titulo h-auto d-inline-block ">
               <div class="col text-center">
                 <img class="img-fluid" src="{% static 'web/img/banner_titulo_campeonato.png' %}" alt="titulo-camp" width="650">
@@ -47,63 +74,114 @@
         </div> 
 
 
-        <!--pais-->
+        <!--seccion pais y campeones-->
         <section class="container">
-         <div class="row">
-            <div id="pais_chile" class="col-md-4">
+         <div class="row d-flex justify-content-center align-items-center">
+            <div id="pais_chile" class="col-md-6">
                 {% for info_regiones in info_regiones %}
-                <a class="row justify-content-center align-items-center animacion_region">
-                    <img id="arica" class="me-3 region" src="{{ info_regiones.imagenRegion.url }}" alt="arica"  data-bs-toggle="modal" data-bs-target="#miModal{{info_regiones.pk}}">
+                <a class="row justify-content-center align-items-center animacion_region text-center">
+                    <img id="arica" class=" region img-fluid" src="{{ info_regiones.imagenRegion.url }}" alt="arica"  data-bs-toggle="modal" data-bs-target="#miModal{{info_regiones.pk}}">
+                </a>
+                {% endfor %}
+                {% for info_region_magallanes in info_region_magallanes %}
+                <a class="row justify-content-center align-items-center animacion_region text-center">
+                    <img id="magallanes" class="region img-fluid" src="{{ info_region_magallanes.imagenRegion.url }}" alt="magallanes"  data-bs-toggle="modal" data-bs-target="#miModalMagallanes{{info_region_magallanes.pk}}">
                 </a>
                 {% endfor %}
             </div>
-            <div id="col-pareja-card" class="col-md-7 mt-5">
-              <!--card de delegados y parejas-->
-              {% for info_regiones in info_regiones %}
-              <div class="mt-5 pt-2 modal fade" id="miModal{{info_regiones.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-body">
-                      <div class="card slide-in-fwd-center ">
-                        <div class="card-body bg-light bg-gradient">
-                          <div class="row ">
-                            <div class="col-12 text-center">
-                              <h4 class="fw-bold">Delegado Regional</h4>
-                              <h5 class="text-warning fw-bold">{{info_regiones.nombreRegion}}</h5>
-                              <img class="rounded-circle img-fluid w-25" src="{{info_regiones.fotoDelegado.url}}" alt="delegado">
-                              <p class="fw-bold mt-1">{{info_regiones.nombreCompletoDelegado}}</p>
-                              <p class="fw-bold">{{info_regiones.correoDelegado}}</p>
-                            </div>
-                            <div class="col-6 ps-0 pe-0 text-center">
-                              <h4 class="fw-bold">Competidor <span class="text-warning">Regional</span></h4>
-                              <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidor.url}}" alt="delegado">
-                              <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
-                            </div>
-                            <div class="col-6 ps-0 pe-0 text-center">
-                              <h4 class="fw-bold">Competidora <span class="text-warning">Regional</span></h4>
-                              <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidora.url}}" alt="delegado">
-                              <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
-                            </div>
-                          </div>
-                        </div>
+            <div id="col-pareja-card" class="col-xs-12 col-md-6 mt-5">
+              <!--cuequeros campeones-->
+              <div id="cuequeros" class="text-center">
+                <img class="img-fluid w-75" src="{% static 'web/img/pareja_index.png' %}" alt="">
+                <div class="ms-2 mt-3">
+                  <h5 class="fst-italic">Campeones Nacionales - 2023</h5>
+                </div>
+              </div>
+              <!-- fin cuequeros campeones-->
+            </div>
+         </div>
+        </section>
+
+        <!--card de delegados y parejas-->
+        {% for info_regiones in info_regiones %}
+        <div class="mt-5 pt-2 modal fade" id="miModal{{info_regiones.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="card slide-in-fwd-center ">
+                  <div class="card-body bg-light bg-gradient">
+                    <div class="row ">
+                      <div class="col-12 text-center">
+                        <h4 class="fw-bold">Delegado Regional</h4>
+                        <h5 class="text-warning fw-bold">{{info_regiones.nombreRegion}}</h5>
+                        {% if info_regiones.fotoDelegado %}
+                        <img class="rounded-circle img-fluid w-25" src="{{info_regiones.fotoDelegado.url}}" alt="delegado">
+                        {% endif %}
+                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoDelegado}}</p>
+                        <p class="fw-bold">{{info_regiones.correoDelegado}}</p>
+                      </div>
+                      <div class="col-6 ps-0 pe-0 text-center">
+                        <h5 class="fw-bold">Campeona <span class="text-warning">Regional</span></h5>
+                        {% if info_regiones.fotoCompetidora %}
+                        <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidora.url}}" alt="delegado">
+                        {% endif %}
+                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
+                      </div>
+                      <div class="col-6 ps-0 pe-0 text-center">
+                        <h5 class="fw-bold">Campeón <span class="text-warning">Regional</span></h5>
+                        {% if info_regiones.fotoCompetidor %}
+                        <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidor.url}}" alt="delegado">
+                        {% endif %}
+                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {% endfor %}
-              <!--card de delegados y parejas-->
-
-              <!--cuequeros campeones-->
-              <div id="cuequeros">
-                <img class="img-fluid " src="{% static 'web/img/pareja_index.png' %}" alt="">
-                <h5 class="fst-italic ps-5 ms-5">Campeones Nacionales - 2023</h5>
-              </div>
-              <!-- fin cuequeros campeones-->
             </div>
-         </div>
-
-
+          </div>
+        </div>
+        {% endfor %}
+        {% for info_region_magallanes in info_region_magallanes %}
+        <div class="mt-5 pt-2 modal fade" id="miModalMagallanes{{info_region_magallanes.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="card slide-in-fwd-center ">
+                  <div class="card-body bg-light bg-gradient">
+                    <div class="row ">
+                      <div class="col-12 text-center">
+                        <h4 class="fw-bold">Delegado Regional</h4>
+                        <h5 class="text-warning fw-bold">{{info_region_magallanes.nombreRegion}}</h5>
+                        {% if info_region_magallanes.fotoDelegado %}
+                        <img class="rounded-circle img-fluid w-25" src="{{info_region_magallanes.fotoDelegado.url}}" alt="delegado">
+                        {% endif %}
+                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoDelegado}}</p>
+                        <p class="fw-bold">{{info_region_magallanes.correoDelegado}}</p>
+                      </div>
+                      <div class="col-6 ps-0 pe-0 text-center">
+                        <h5 class="fw-bold">Campeona <span class="text-warning">Regional</span></h5>
+                        {% if info_region_magallanes.fotoCompetidora %}
+                        <img class="rounded-circle img-fluid w-50" src="{{info_region_magallanes.fotoCompetidora.url}}" alt="delegado">
+                        {% endif %}
+                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidora}}</p>
+                      </div>
+                      <div class="col-6 ps-0 pe-0 text-center">
+                        <h5 class="fw-bold">Campeón <span class="text-warning">Regional</span></h5>
+                        {% if info_region_magallanes.fotoCompetidor %}
+                        <img class="rounded-circle img-fluid w-50" src="{{info_region_magallanes.fotoCompetidor.url}}" alt="delegado">
+                        {% endif %}
+                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidor}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}        
+        <!--card de delegados y parejas-->
 
 
         <!--separador-->

@@ -3,3 +3,4 @@ from .models import *
 # Register your models here.
 admin.site.register(Noticia)
 admin.site.register(Regiones)
+admin.site.register(EnVivos)
