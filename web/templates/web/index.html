@@ -5,31 +5,109 @@
 
         <!--Seccion live-->
         {% if en_vivo.activar_en_vivo %}
-          <section class="row d-flex justify-content-center mt-3">
-            <div class="col-xs-12 col-md-6 mt-3">
+          <section class="row mt-3">
+            <div class="col-12">
               <div class="text-center">
                   <img class="img-fluid mb-5" src="{% static 'web/img/titulo_campeonato_vivo.png'%}" alt="logo">
               </div>
             </div>
-            <div class="col-md-8">
-              <div class="text-center ratio ratio-16x9">
+            <div class="col-md-6">
+              <div class="ratio ratio-16x9">
                 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  width="1280" title="Transmisión Oficial Campeonato Nacional Jovenes del Bicentenario" height="720" src="https://www.youtube.com/embed/OMlV3Q9h5rA?si=lpv1uJN45ruq3TZe" frameborder="0" allowfullscreen></iframe>
               </div>
             </div>
-          </section>
+            <!--col votaciones-->
+            <div id="col-votaciones" class="col-xs-4 col-md-3">
+              <form method="post" action="{% url 'home' %}">
+                <div class="card rounded fondo-card-votacion votacion-card-body">
+                  <div class="card-body ">
+                    <h3 class="card-title text-center titulo-card fw-bold">Vota por tu pareja favorita</h3>
+                    <div class="text-center">
+                      {% csrf_token %}
+                      {% for info_regiones in info_regiones %}
+                      <div class="row d-flex align-items-center mb-4 rounded-pill pb-5">
+                        <div class="col-12 text-center">
+                          <h2 name="region_nombre" value="{{info_regiones.nombreRegion}}" class="titulo-region-votacion fw-bold">{{info_regiones.nombreRegion}}</h2>
+                        </div>
+                        <div class="col-6 ps-0 pe-0 text-center">
+                          {% if info_regiones.fotoCompetidora %}
+                          <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_regiones.fotoCompetidora.url}}" alt="competidora">
+                          {% endif %}
+                          <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
+                        </div>
+                        <div class="col-6 ps-0 pe-0 text-center">
+                          {% if info_regiones.fotoCompetidor %}
+                          <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_regiones.fotoCompetidor.url}}" alt="competidor">
+                          {% endif %}
+                          <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center text-center">
+                          <button type="submit" name="region_id" value="{{info_regiones.id}}" class="fw-bold btn btn-warning mt-4 w-50 mb-5">Votar por la pareja de {{info_regiones.nombreRegion}}</button>
+                        </div>
+                      </div>
+                      {% endfor %}
 
-          <!--Seccion live-->
-
-          <!--separador-->
-          <section class="row d-flex justify-content-center mt-3 ">
-            <div class="col-8 text-center">
-              <div class="border-top mt-1 border-danger "></div>
-              <div class="border-top mt-1 border-primary "></div>
+                      <!--Loop magallanes-->
+                      {% for info_region_magallanes in info_region_magallanes %}
+                      <div class="row d-flex align-items-center mb-4 rounded-pill pb-5">
+                        <div class="col-12 text-center">
+                          <h2 class="titulo-region-votacion fw-bold">{{info_region_magallanes.nombreRegion}}</h2>
+                        </div>
+                        <div class="col-6 ps-0 pe-0 text-center">
+                          {% if info_region_magallanes.fotoCompetidora %}
+                          <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_region_magallanes.fotoCompetidora.url}}" alt="competidora">
+                          {% endif %}
+                          <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidora}}</p>
+                        </div>
+                        <div class="col-6 ps-0 pe-0 text-center">
+                          {% if info_region_magallanes.fotoCompetidor %}
+                          <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_region_magallanes.fotoCompetidor.url}}" alt="competidor">
+                          {% endif %}
+                          <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidor}}</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center text-center">
+                          <button type="submit" name="region_id" value="{{info_region_magallanes.id}}" class="fw-bold btn btn-warning mt-4 w-50 mb-5">Votar por la pareja de {{info_region_magallanes.nombreRegion}}</button>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </form>  
+            </div>
+            <!--Resultados-->
+            <div class="col-md-3">
+              <div class="card rounded">
+                <div class="card-body">
+                  <h3 class="card-title text-center titulo-card titulo-card fw-bold">Resultados</h3>
+                  {% for resultados_votos in resultados_votos %}
+                  <div class="row">
+                    <div class="col-12 text-center">
+                      <h2 name="region_nombre" class="titulo-region-votacion fw-bold">{{resultados_votos.nombreRegion}}</h2>
+                    </div>
+                    <div class="col-6 ps-0 pe-0 text-center">
+                      {% if resultados_votos.fotoCompetidora %}
+                      <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{resultados_votos.fotoCompetidora.url}}" alt="competidora">
+                      {% endif %}
+                      <p class="fw-bold mt-1">{{resultados_votos.nombreCompletoCompetidora}}</p>
+                    </div>
+                    <div class="col-6 ps-0 pe-0 text-center">
+                      {% if resultados_votos.fotoCompetidor %}
+                      <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{resultados_votos.fotoCompetidor.url}}" alt="competidor">
+                      {% endif %}
+                      <p class="fw-bold mt-1">{{resultados_votos.nombreCompletoCompetidor}}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
             </div>
           </section>
+          <!--Seccion live-->
+
+
         {% endif %}
         
-        <!--banner logo + carrusel-->
+        <!--banner logo + carrusel
         <section class="container">
             <div class="row align-items-center mt-5">
                 <div class="col-xs-12 col-md-6 mt-3">
@@ -37,7 +115,7 @@
                         <img class="img-fluid mb-5" src="{% static 'web/img/logo banner.png'%}" alt="logo">
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 d-flex justify-content-center"> <!--Carrusel-->
+                <div class="col-xs-12 col-md-6 d-flex justify-content-center"> 
                     <div>
                         <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
@@ -52,7 +130,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
         <!--separador-->
         <section class="row d-flex justify-content-center  ">
@@ -252,7 +330,7 @@
         <section class="container">
           <div class="row p-0">
             <div class="col-md-5">
-              <img class="img-fluid" src="{% static 'web/img/bases.png' %}" alt="pareja_bases">
+              <img class="img-fluid" src="{% static 'web/img/pareja_noticias.png' %}" alt="pareja_bases">
             </div>
             <div class="col-md-6 d-flex align-items-center flex-wrap">
                 <p class="fs-2 text-center fst-italic">Conoce nuestras bases en nuestro pdf</p>

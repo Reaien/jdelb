@@ -32,19 +32,3 @@ observer.observe(idChile);
 observer.observe(idPareja);
 //end observer pareja
 
-//animacion region 
-
-//const cardDelegado = document.getElementById('cardDelegado');
-//const regiones = document.getElementsByClassName('region');
-
-//for (let index = 0; index < regiones.length; index++) {
-//    regiones[index].addEventListener('mouseover', function(){
-//        cardDelegado.style.display= 'block';
-//        idPareja.style.display= 'none';
-//    });
-//    regiones[index].addEventListener('mouseout', function(){
-//        cardDelegado.style.display= 'none';
-//        idPareja.style.display= 'block';
-//    });
-//}
-

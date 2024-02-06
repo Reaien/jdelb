@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Noticia)
 admin.site.register(Regiones)
 admin.site.register(EnVivos)
+admin.site.register(Votaciones)

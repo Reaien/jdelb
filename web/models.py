@@ -22,17 +22,25 @@ class Regiones(models.Model):
     nombreCompletoDelegado = models.CharField(max_length=100, null=True)
     correoDelegado = models.CharField(max_length=150, null=True, blank=True)
     fotoDelegado = models.ImageField(upload_to="images", null=True, blank=True)
-    nombreCompletoCompetidor = models.CharField(max_length=100, null=True)
+    nombreCompletoCompetidor = models.CharField(max_length=100, null=True, blank=True, default="")
     fotoCompetidor = models.ImageField(upload_to="images", null=True, blank=True)
-    nombreCompletoCompetidora = models.CharField(max_length=100, null=True)
+    nombreCompletoCompetidora = models.CharField(max_length=100, null=True, blank=True, default="")
     fotoCompetidora = models.ImageField(upload_to="images", null=True, blank=True)
     imagenRegion = models.ImageField(upload_to="images", null=True)
+    votos = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'Regiones'
 
     def __str__(self):
         return self.nombreRegion
+    
+class Votaciones(models.Model):
+    ip = models.GenericIPAddressField()
+    nombreRegion = models.ForeignKey(Regiones, on_delete=models.PROTECT)
+
+    class Meta:
+        db_table = 'Votacion'
     
 class EnVivos(models.Model):
     activar_en_vivo = models.BooleanField( default=False)
