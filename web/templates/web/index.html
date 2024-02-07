@@ -17,7 +17,7 @@
               </div>
             </div>
             <!--col votaciones-->
-            <div id="col-votaciones" class="col-xs-4 col-md-3">
+            <div id="col-votaciones" class="col-xs-4 col-md-4 col-xl-3">
               <form method="post" action="{% url 'home' %}">
                 <div class="card rounded fondo-card-votacion votacion-card-body">
                   <div class="card-body ">
@@ -76,27 +76,31 @@
               </form>  
             </div>
             <!--Resultados-->
-            <div class="col-md-3">
-              <div class="card rounded">
-                <div class="card-body">
+            <div class="col-md-6 col-xl-3 borde-resultado">
+              <div class="card border border-0 fondo-card-resultado">
+                <img class="img-fluid" src="{% static 'web/img/borde-flores.png' %}" alt="borde-flores">
+                <div class="card-body card-resultado">
                   <h3 class="card-title text-center titulo-card titulo-card fw-bold">Resultados</h3>
                   {% for resultados_votos in resultados_votos %}
                   <div class="row">
                     <div class="col-12 text-center">
-                      <h2 name="region_nombre" class="titulo-region-votacion fw-bold">{{resultados_votos.nombreRegion}}</h2>
+                      <h5 name="region_nombre" class="titulo-region-votacion-resultados fw-bold">{{resultados_votos.nombreRegion}}</h5>
                     </div>
-                    <div class="col-6 ps-0 pe-0 text-center">
-                      {% if resultados_votos.fotoCompetidora %}
-                      <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{resultados_votos.fotoCompetidora.url}}" alt="competidora">
-                      {% endif %}
-                      <p class="fw-bold mt-1">{{resultados_votos.nombreCompletoCompetidora}}</p>
+                    <div class="d-flex justify-content-start">
+                      <div class="col-6 ps-0 pe-0 text-center">
+                        {% if resultados_votos.fotoCompetidora %}
+                        <img class="rounded-4 img-fluid w-50 border border-5" src="{{resultados_votos.fotoCompetidora.url}}" alt="competidora">
+                        {% endif %}
+                        <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidora}}</p>
+                      </div>
+                      <div class="col-6 ps-0 pe-0 text-center">
+                        {% if resultados_votos.fotoCompetidor %}
+                        <img class="rounded-4 img-fluid w-50 border border-5" src="{{resultados_votos.fotoCompetidor.url}}" alt="competidora">
+                        {% endif %}
+                        <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidor}}</p>
+                      </div>
                     </div>
-                    <div class="col-6 ps-0 pe-0 text-center">
-                      {% if resultados_votos.fotoCompetidor %}
-                      <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{resultados_votos.fotoCompetidor.url}}" alt="competidor">
-                      {% endif %}
-                      <p class="fw-bold mt-1">{{resultados_votos.nombreCompletoCompetidor}}</p>
-                    </div>
+                  </div>
                   {% endfor %}
                 </div>
               </div>
