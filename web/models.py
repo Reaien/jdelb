@@ -53,3 +53,14 @@ class EnVivos(models.Model):
         param = 'Activar Bloque en vivo'
         return param
     
+class Campeones(models.Model):
+    nombre_pareja = models.CharField(max_length=100, null=True)
+    anno_campeon = models.CharField(max_length=5, null=True)
+    foto_campeones = models.ImageField(upload_to="images", null=True)
+
+    class Meta:
+        db_table = 'Campeones'
+
+    def __str__(self):
+        return self.anno_campeon
+    
