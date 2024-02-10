@@ -9,8 +9,10 @@ body{
 .banner_campeones{
     object-fit: cover;
     object-position: center;
-    max-height: 32vw;
+    max-height: 31vw;
 }
+
+
 
 #magallanes{
     width: 11rem;
@@ -31,7 +33,7 @@ body{
 }
 
 .contenedor_navbar{
-    padding-right: 20rem;
+    padding-left: 8vh;
     justify-content: center;
 }
 
@@ -148,7 +150,7 @@ body{
 }
 
 .fondo-card-votacion{
-    background-color: rgb(254, 249, 243);
+    background-color: rgba(254, 249, 243, 0);
     border-color: antiquewhite;
 }
 
@@ -181,7 +183,7 @@ body{
 
 @media (max-width:1700px) {
     .votacion-card-body{
-        max-height: 33rem;
+        max-height: 25rem;
     }
 }
 
@@ -217,10 +219,23 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+@media (max-width:360px) {
+    .card-resultado{
+        width: 10rem;
+        top: 70%;
+    }
+}
 
 @media (max-width:450px) {
     .card-resultado{
         width: 10rem;
         top: 55%;
+    }
+}
+
+@media (max-width:1850px) {
+    .card-resultado{
+        width: 10rem;
+        top: 58%;
     }
 }

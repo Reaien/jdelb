@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-
+from django.http import JsonResponse
 from web.forms import VotacionForm
 from .models import EnVivos, Noticia, Regiones, Votaciones
 from django.contrib import messages
@@ -20,17 +20,24 @@ def home(request):
             user_ip = request.META.get('REMOTE_ADDR')
 
             # Verifica si la IP ya ha votado
-            #if Votaciones.objects.filter(ip=user_ip).exists():
-                #messages.warning(request, "Ya has votado por una región.")
-
-            #else:
-            region.votos += 1
-            region.save()
-            Votaciones.objects.create(ip=user_ip, nombreRegion=region)
-            messages.success(request, "Tu voto por " + region_nombre + " ha sido añadido correctamente.")
-            return redirect('home') 
+            if Votaciones.objects.filter(ip=user_ip).exists():
+                messages.warning(request, "Ya has votado por una región.")
+            else:
+                region.votos += 1
+                region.save()
+                Votaciones.objects.create(ip=user_ip, nombreRegion=region)
+                messages.success(request, "Tu voto por " + region_nombre + " ha sido añadido correctamente.")
+                return redirect('home') 
     else:
         form = VotacionForm()
+
+
+    # Si la solicitud es AJAX, devuelve los resultados de los votos en formato JSON
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = list(resultados_votos.values('nombreRegion', 'nombreCompletoCompetidora', 'nombreCompletoCompetidor','votos','fotoCompetidora', 'fotoCompetidor'))
+        return JsonResponse({'resultados_votos': data})
+
+
     return render(request, 'web/index.html',{
         'first_noticia': first_noticia,
         'old_noticia': old_noticia,

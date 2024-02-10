@@ -44,7 +44,12 @@ class Votaciones(models.Model):
     
 class EnVivos(models.Model):
     activar_en_vivo = models.BooleanField( default=False)
+    link_transmision = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         db_table = 'EnVivos'
+
+    def __str__(param):
+        param = 'Activar Bloque en vivo'
+        return param
     
