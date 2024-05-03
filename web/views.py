@@ -20,15 +20,19 @@ def home(request):
             region = Regiones.objects.get(pk=region_id)
             user_ip = request.META.get('REMOTE_ADDR')
 
-            # Verifica si la IP ya ha votado
-            if Votaciones.objects.filter(ip=user_ip).exists():
+            # Verifica si el usuario ya ha votado (utilizando una cookie)
+            if 'voto_realizado' in request.COOKIES:
                 messages.warning(request, "Ya has votado por una región.")
             else:
                 region.votos += 1
                 region.save()
                 Votaciones.objects.create(ip=user_ip, nombreRegion=region)
+
+                # Establece una cookie para rastrear que el usuario ya ha votado
+                response = redirect('home')
+                response.set_cookie('voto_realizado', 'true', max_age=3600)  # Establece una cookie válida por 1 hora
                 messages.success(request, "Tu voto por " + region_nombre + " ha sido añadido correctamente.")
-                return redirect('home') 
+                return response
     else:
         form = VotacionForm()
 

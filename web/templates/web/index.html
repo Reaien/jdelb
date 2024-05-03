@@ -5,19 +5,20 @@
 
         <!--Seccion live-->
         {% if en_vivo.activar_en_vivo %}
-          <section class="row mt-3">
+          <section class="row mt-3 ">
             <div class="col-12">
               <div class="text-center">
                   <img class="img-fluid mb-5 mt-5" src="{% static 'web/img/titulo_campeonato_vivo.webp'%}" alt="logo">
               </div>
             </div>
-            <div class="col-md-6 col-xl-6">
-              <div class="ratio ratio-16x9">
+            <div class="col-md-6 col-xl-7 ">
+              <div class="ratio ratio-16x9 ">
                 
                 <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  width="1280" title="Transmisión Oficial Campeonato Nacional Jovenes del Bicentenario" height="720" src="{{en_vivo.link_transmision}}" frameborder="0" allowfullscreen></iframe>
               </div>
             </div>
             <!--col votaciones-->
+            <!--
             <div id="col-votaciones" class="col-xs-4 col-md-4 col-xl-3">
               <form method="post" action="{% url 'home' %}">
                 <div class="card rounded fondo-card-votacion votacion-card-body">
@@ -48,7 +49,7 @@
                       </div>
                       {% endfor %}
 
-                      <!--Loop magallanes-->
+                      
                       {% for info_region_magallanes in info_region_magallanes %}
                       <div class="row d-flex align-items-center mb-4 rounded-pill pb-5">
                         <div class="col-12 text-center">
@@ -75,33 +76,34 @@
                   </div>
                 </div>
               </form>  
-            </div>
+            </div>-->
             <!--Resultados-->
-            <div class="col-md-6 col-xl-3 borde-resultado">
-              <h3 class="card-title text-center titulo-card titulo-card fw-bold">Resultados</h3>
+            <div class="col-md-7 col-xl-4 d-flex justify-content-center align-items-center borde-resultado">
+              
               <div class="card border border-0 fondo-card-resultado">
-                <img class="img-fluid" src="{% static 'web/img/borde-flores.webp' %}" alt="borde-flores">
+                <h3 class="card-title text-center titulo-card fw-bold">Resultados</h3>
+                <img class="img-fluid fondo-card" src="{% static 'web/img/borde-flores.png' %}" alt="borde-flores">
                 <div id="tabla-resultados" class="card-body card-resultado">
                   {% for resultados_votos in resultados_votos %}
-                  <div class="row">
+                  <div class="row fila-resultados">
                     <div class="col-md-12 text-center">
                       <h5 name="region_nombre" class="titulo-region-votacion-resultados fw-bold">{{resultados_votos.nombreRegion}}</h5>
                     </div>
-                    <div class="d-flex justify-content-start">
-                      <div class="col-md-4 col-xl-5 ps-0 pe-0 text-center ">
+                    <div class="col-12">
+                      <div class="col-md-6 ps-0 pe-0 text-center ">
                         {% if resultados_votos.fotoCompetidora %}
                         <img class="rounded-4 img-fluid w-75 border border-5" src="{{resultados_votos.fotoCompetidora.url}}" alt="competidora">
                         {% endif %}
                         <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidora}}</p>
                       </div>
-                      <div class="col-md-4 col-xl-5 ps-0 pe-0 text-center">
+                      <div class="col-md-6 ps-0 pe-0 text-center">
                         {% if resultados_votos.fotoCompetidor %}
                         <img class="rounded-4 img-fluid w-75 border border-5" src="{{resultados_votos.fotoCompetidor.url}}" alt="competidora">
                         {% endif %}
                         <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidor}}</p>
                       </div>
-                      <div class="col-md-3 col-xl-3 d-flex justify-content-center align-items-center">
-                        <p class="fw-bold mt-1 nombre-competidor-resultados">Votos: {{resultados_votos.votos}}</p>
+                      <div class="col-4 d-flex align-items-center">
+                        <p class="fw-bold mt-1 ms-1 nombre-competidor-resultados">Votos: {{resultados_votos.votos}}</p>
                       </div>
                     </div>
                   </div>
