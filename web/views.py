@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from web.forms import VotacionForm
-from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones
+from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones, BloqueVotaciones
 from django.contrib import messages
 # Create your views here.
 def home(request):
@@ -12,6 +12,7 @@ def home(request):
     en_vivo = EnVivos.objects.first()
     resultados_votos = Regiones.objects.all().order_by('-votos')[0:3]
     last_campeones = Campeones.objects.last()
+    bloque_votacion = BloqueVotaciones.objects.first()
     if request.method == 'POST':
         form = VotacionForm(request.POST)
         if form.is_valid():
@@ -51,5 +52,6 @@ def home(request):
         'en_vivo': en_vivo,
         'form': form,
         'resultados_votos': resultados_votos,
-        'last_campeones': last_campeones
+        'last_campeones': last_campeones,
+        'bloque_votacion' : bloque_votacion
     })

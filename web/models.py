@@ -53,6 +53,14 @@ class EnVivos(models.Model):
         param = 'Activar Bloque en vivo'
         return param
     
+class BloqueVotaciones(models.Model):
+    activar_votaciones = models.BooleanField(default=False)
+    class Meta:
+        db_table = 'Votaciones'
+    def __str__(param):
+        param = 'Activar bloque votaciones'
+        return param
+    
 class Campeones(models.Model):
     nombre_pareja = models.CharField(max_length=100, null=True)
     anno_campeon = models.CharField(max_length=5, null=True)
