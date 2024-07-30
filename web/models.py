@@ -72,3 +72,15 @@ class Campeones(models.Model):
     def __str__(self):
         return self.anno_campeon
     
+class Region(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+
+class Comuna(models.Model):
+    nombre = models.CharField(max_length=100)
+    region = models.ForeignKey(Region, related_name='comunas', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.nombre

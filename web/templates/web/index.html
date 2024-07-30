@@ -115,11 +115,11 @@
         {% endif %}
 
 
-
+        <!--Seccion inscripción-->
         <section>
           <div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-warning fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-warning fw-medium" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Inscríbete al campeonato
             </button>
 
@@ -128,8 +128,37 @@
               <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                   <div class="modal-body">
-                    <form class="row">
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <img src="/web/static/web/img/banner-inscripcion.png" alt="">
+                      </div>
+                    </div>
+                    <form class="row" action="{% url 'home' %}">
+                      <div class="col-12 text-center">
+                        <div class="col-6 mx-auto">
+                          <h4 class="text-center">
+                            Representación
+                          </h4>
+                          <div class="mb-3">
+                            <label  class="form-label">Región</label>
+                            <select class="form-select" name="" id="">
+                              <option value="">Arica</option>
+                              <option value="">Antofagasta</option>
+                            </select>
+                          </div>
+                          <div class="mb-3">
+                            <label  class="form-label">Comuna</label>
+                            <select class="form-select" name="" id="">
+                              <option value="">-</option>
+                            </select>
+                          </div>
+                        </div>
+                        
+                      </div>
                       <div class="col-6">
+                        <h4 class="text-center">
+                          Datos de la bailarina
+                        </h4>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Email address</label>
                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -144,6 +173,9 @@
                         </div>
                       </div>
                       <div class="col-6">
+                        <h4 class="text-center">
+                          Datos del bailarín
+                        </h4>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Email address</label>
                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -158,7 +190,10 @@
                         </div>
                       </div>
                       
-                      <button type="button" class="fw-bold btn btn-warning mt-4 w-50">Enviar inscripción</button>
+                      <div class="col-6 text-center">
+                        <button type="submit" class="btn btn-warning mt-4 w-50">Enviar inscripción</button>
+                      </div>
+                      
                     </form>
                   </div>
                 </div>
@@ -166,6 +201,7 @@
             </div>
           </div>
         </section>
+        <!--Fin Seccion inscripción-->
 
         <!--Banner campeonato nacional-->
         <div class="row mt-3">
