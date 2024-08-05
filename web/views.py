@@ -1,10 +1,11 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from web.forms import VotacionForm
-from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones, BloqueVotaciones
+from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones, BloqueVotaciones, Comuna, Region
 from django.contrib import messages
 # Create your views here.
 def home(request):
+    regiones = Region.objects.all()
     first_noticia = Noticia.objects.last()
     old_noticia = Noticia.objects.all().order_by('-id')[1:5]
     info_regiones = Regiones.objects.all()[0:15]
@@ -53,5 +54,11 @@ def home(request):
         'form': form,
         'resultados_votos': resultados_votos,
         'last_campeones': last_campeones,
-        'bloque_votacion' : bloque_votacion
+        'bloque_votacion' : bloque_votacion,
+        'regiones': regiones
+        
     })
+
+def obtener_comunas(request, region_id):
+    comunas = Comuna.objects.filter(region_id=region_id).values('id', 'nombre')
+    return JsonResponse(list(comunas), safe=False)

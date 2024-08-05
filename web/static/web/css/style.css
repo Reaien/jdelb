@@ -6,10 +6,10 @@ body{
     width: 4.5rem;
 }
 
-.banner_campeones{
+#carouselExampleAutoplaying .carousel-item{
     object-fit: cover;
     object-position: center;
-    max-height: 31vw;
+    max-height: 30vw;
 }
 
 

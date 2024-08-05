@@ -2,6 +2,29 @@
 {% load static %}       
 {% block contenido_body %}
 
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100 " src="{% static 'web/img/banner_inscripcion.webp' %}" alt="banner">
+          </div>
+          <div class="carousel-item">
+            <img class="" src="{% static 'web/img/banner_campeones.webp' %}" alt="banner">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
       <!--Seccion live-->
       {% if en_vivo.activar_en_vivo %}
@@ -140,16 +163,18 @@
                             Representación
                           </h4>
                           <div class="mb-3">
-                            <label  class="form-label">Región</label>
-                            <select class="form-select" name="" id="">
-                              <option value="">Arica</option>
-                              <option value="">Antofagasta</option>
+                            <label class="form-label">Región</label>
+                            <select class="form-select" id="region_inscripcion" name="region_inscripcion">
+                                <option value="">Selecciona una región</option>
+                                {% for region in regiones %}
+                                    <option value="{{ region.id }}">{{ region.nombre }}</option>
+                                {% endfor %}
                             </select>
                           </div>
                           <div class="mb-3">
-                            <label  class="form-label">Comuna</label>
-                            <select class="form-select" name="" id="">
-                              <option value="">-</option>
+                            <label class="form-label">Comuna</label>
+                            <select class="form-select" id="comuna_inscripcion" name="comuna_inscripcion">
+                                <option value="">Selecciona una comuna</option>
                             </select>
                           </div>
                         </div>
@@ -159,34 +184,58 @@
                         <h4 class="text-center">
                           Datos de la bailarina
                         </h4>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
+                        <div class="mb-3 form-check">
+                          <label for="nombre" class="form-label">Nombre</label>
+                          <input type="text" name="nombre" placeholder="Nombre Completo Bailarina" class="form-control" id="nombre">
                         </div>
                         <div class="mb-3 form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                          <label for="edad" class="form-label">Edad</label>
+                          <input type="number" id="edad" class="form-control" name="edad" min="0" max="99" placeholder="Ingresa tu edad" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="fechanac" class="form-label">Fecha de nacimiento</label>
+                          <input type="date" name="fechanac" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="rut" class="form-label">Rut</label>
+                          <input type="text" class="form-control" id="rut" name="rut" maxlength="12" placeholder="Ej: x.xxx.xxx-x">
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="email" class="form-label">Correo Electronico</label>
+                          <input type="email" name="email" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="fono" class="form-label">Telefono de contacto</label>
+                          <input type="number" min="0" name="fono" placeholder="Ej: 9 5852 5454" class="form-control" id="exampleInputPassword1">
                         </div>
                       </div>
                       <div class="col-6">
                         <h4 class="text-center">
                           Datos del bailarín
                         </h4>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
+                        <div class="mb-3 form-check">
+                          <label for="nombre" class="form-label">Nombre</label>
+                          <input type="text" name="nombre" placeholder="Nombre Completo Bailarín" class="form-control" id="nombre">
                         </div>
                         <div class="mb-3 form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                          <label for="edad" class="form-label">Edad</label>
+                          <input type="number" id="edad" class="form-control" name="edad" min="0" max="99" placeholder="Ingresa tu edad" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="fechanac" class="form-label">Fecha de nacimiento</label>
+                          <input type="date" name="fechanac" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="rut" class="form-label">Rut</label>
+                          <input type="text" class="form-control" id="rut" name="rut" maxlength="12" placeholder="Ej: x.xxx.xxx-x">
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="email" class="form-label">Correo Electronico</label>
+                          <input type="email" name="email" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3 form-check">
+                          <label for="fono" class="form-label">Telefono de contacto</label>
+                          <input type="number" min="0" name="fono" placeholder="Ej: 9 5852 5454" class="form-control" id="exampleInputPassword1">
                         </div>
                       </div>
                       
