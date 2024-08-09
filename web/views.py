@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from web.forms import VotacionForm
-from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones, BloqueVotaciones, Comuna, Region
+from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones, BloqueVotaciones, Comuna, Region, Inscripcion
 from django.contrib import messages
 # Create your views here.
 def home(request):
@@ -35,6 +35,32 @@ def home(request):
                 response.set_cookie('voto_realizado', 'true', max_age=3600)  # Establece una cookie válida por 1 hora
                 messages.success(request, "Tu voto por " + region_nombre + " ha sido añadido correctamente.")
                 return response
+        elif 'enviar_inscripcion' in request.POST:  # Identifica el formulario de inscripción
+            
+ # Recoge los datos del formulario de inscripción
+            region_id = request.POST.get('region_inscripcion')
+            comuna_id = request.POST.get('comuna_inscripcion')
+            nombre_bailarina = request.POST.get('nombre')
+            edad_bailarina = request.POST.get('edad')
+            fechanac_bailarina = request.POST.get('fechanac')
+            rut_bailarina = request.POST.get('rut')
+            email_bailarina = request.POST.get('email')
+            fono_bailarina = request.POST.get('fono')
+
+            # Guardar los datos en la base de datos
+            inscripcion = Inscripcion(
+                region_id=region_id,
+                comuna_id=comuna_id,
+                nombre=nombre_bailarina,
+                edad=edad_bailarina,
+                fecha_nacimiento=fechanac_bailarina,
+                rut=rut_bailarina,
+                email=email_bailarina,
+                telefono=fono_bailarina
+            )
+            inscripcion.save()
+            messages.success(request, "Tu inscripción ha sido enviada correctamente.")
+            return redirect('home') 
     else:
         form = VotacionForm()
 

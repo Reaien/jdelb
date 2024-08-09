@@ -84,3 +84,22 @@ class Comuna(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class Inscripcion(models.Model):
+    region = models.ForeignKey('Region', on_delete=models.CASCADE)
+    comuna = models.ForeignKey('Comuna', on_delete=models.CASCADE)
+    nombre_bailarina = models.CharField(max_length=100)
+    edad_bailarina = models.PositiveIntegerField()
+    fecha_nacimiento_bailarina = models.DateField()
+    rut_bailarina = models.CharField(max_length=12)
+    email_bailarina = models.EmailField()
+    telefono_bailarina = models.CharField(max_length=15)
+    nombre_bailarin = models.CharField(max_length=100)
+    edad_bailarin = models.PositiveIntegerField()
+    fecha_nacimiento_bailarin = models.DateField()
+    rut_bailarin = models.CharField(max_length=12)
+    email_bailarin = models.EmailField()
+    telefono_bailarin = models.CharField(max_length=15)
+
+    def __str__(self):
+        return f"Inscripción de {self.nombre_bailarina} y {self.nombre_bailarin}"

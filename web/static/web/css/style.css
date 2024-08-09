@@ -9,7 +9,7 @@ body{
 #carouselExampleAutoplaying .carousel-item{
     object-fit: cover;
     object-position: center;
-    max-height: 30vw;
+    height: 28vw;
 }
 
 
@@ -32,10 +32,7 @@ body{
     }
 }
 
-.contenedor_navbar{
-    padding-left: 8vh;
-    justify-content: center;
-}
+
 
 
 
