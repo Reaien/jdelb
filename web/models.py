@@ -86,8 +86,8 @@ class Comuna(models.Model):
         return self.nombre
     
 class Inscripcion(models.Model):
-    region = models.ForeignKey('Region', on_delete=models.CASCADE)
-    comuna = models.ForeignKey('Comuna', on_delete=models.CASCADE)
+    region = models.CharField(max_length=100)  # Ahora almacena el nombre en lugar del ID
+    comuna = models.CharField(max_length=100)  # Ahora almacena el nombre en lugar del ID
     nombre_bailarina = models.CharField(max_length=100)
     edad_bailarina = models.PositiveIntegerField()
     fecha_nacimiento_bailarina = models.DateField()
