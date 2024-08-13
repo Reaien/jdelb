@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
-from web.forms import VotacionForm
+from web.forms import VotacionForm, NoticiaForm
 from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones, BloqueVotaciones, Comuna, Region, Inscripcion
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -60,37 +60,37 @@ def home(request):
 
         #obtener el correo por id de región seleccionada
         if region.id == 1:
-            mail_destino = ['arica y parinacota', 'director@jdelb.cl']
+            mail_destino = 'arica@jdelb.cl'
         elif region.id == 2:
-            mail_destino = ['tarapaca', 'director@jdelb.cl']
+            mail_destino = 'tarapaca@jdelb.cl'
         elif region.id == 3:
-            mail_destino = ['antofagasta', 'director@jdelb.cl']
+            mail_destino = 'antofagasta@jdelb.cl'
         elif region.id == 4:
-            mail_destino = ['atacama', 'director@jdelb.cl']
+            mail_destino = 'atacama@jdelb.cl'
         elif region.id == 5:
-            mail_destino = ['coquimbo', 'director@jdelb.cl']
+            mail_destino = 'coquimbo@jdelb.cl'
         elif region.id == 6:
-            mail_destino = ['valparaiso', 'director@jdelb.cl']
+            mail_destino = 'valparaiso@jdelb.cl'
         elif region.id == 7:
-            mail_destino = ['metropolitana', 'director@jdelb.cl']
+            mail_destino = 'rm@jdelb.cl'
         elif region.id == 8:
-            mail_destino = ['ohiggins', 'director@jdelb.cl']
+            mail_destino = 'ohiggins@jdelb.cl'
         elif region.id == 9:
-            mail_destino = ['maule', 'director@jdelb.cl']
+            mail_destino = 'delmaule@jdelb.cl'
         elif region.id == 10:
-            mail_destino = ['nuble', 'director@jdelb.cl']
+            mail_destino = 'nuble@jdelb.cl'
         elif region.id == 11:
-            mail_destino = ['biobio', 'director@jdelb.cl']
+            mail_destino = 'biobio@jdelb.cl'
         elif region.id == 12:
-            mail_destino = ['araucania', 'director@jdelb.cl']
+            mail_destino = 'araucania@jdelb.cl'
         elif region.id == 13:
-            mail_destino = ['rios', 'director@jdelb.cl']
+            mail_destino = 'losrios@jdelb.cl'
         elif region.id == 14:
-            mail_destino = ['lagos', 'director@jdelb.cl']
+            mail_destino = 'loslagos@jdelb.cl'
         elif region.id == 15:
-            mail_destino = ['aysen', 'director@jdelb.cl']
+            mail_destino = 'aysen@jdelb.cl'
         elif region.id == 16:
-            mail_destino = ['magallanes', 'director@jdelb.cl']
+            mail_destino = 'magallanes@jdelb.cl'
         else:
             return
         
@@ -179,3 +179,17 @@ def home(request):
 def obtener_comunas(request, region_id):
     comunas = Comuna.objects.filter(region_id=region_id).values('id', 'nombre')
     return JsonResponse(list(comunas), safe=False)
+
+def crearNoticia(request):
+    data = {
+        'form': NoticiaForm()
+    }
+
+    if request.method == "POST":
+        form = NoticiaForm(request.POST)
+        if form.is_valid():
+            messages.success(request, "Noticia creada correctamente.") 
+            form.save()
+
+
+    return render(request, 'web/crearNoticia.html', data)
