@@ -186,10 +186,12 @@ def crearNoticia(request):
     }
 
     if request.method == "POST":
-        form = NoticiaForm(request.POST)
+        form = NoticiaForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             messages.success(request, "Noticia creada correctamente.") 
             form.save()
+        else:
+            data['form'] = form
 
 
     return render(request, 'web/crearNoticia.html', data)

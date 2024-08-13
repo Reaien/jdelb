@@ -10,13 +10,12 @@
     </section>
 
     <section class="row ">
-        <div class="col-6 mx-auto">
-            <form action="{% url 'crearNoticia' %}" method="POST">
+        <div class="col-5 mx-auto">
+            <form action="{% url 'crearNoticia' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form | crispy }}
              
                 <button type="submit" name="crear_noticia" class="btn btn-warning mt-4 w-25 ">Crear Noticia</button>
- 
             </form>
         </div>
 

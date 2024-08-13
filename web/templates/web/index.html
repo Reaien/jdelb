@@ -21,7 +21,7 @@
           </div>
           {% if bloque_votacion.activar_votaciones %}
           <div id="col-votaciones" class="col-xs-4 col-md-4 col-xl-3">
-            <form method="POST" action="{% url 'home' %}">
+            <form method="POST" action="{% url 'home' %}" enctype="application/x-www-form-urlencoded">
               <div class="card rounded fondo-card-votacion votacion-card-body">
                 <div class="card-body ">
                   <h3 class="card-title text-center titulo-card fw-bold">Vota por tu pareja favorita</h3>
@@ -158,7 +158,7 @@
                         <img src="/web/static/web/img/banner-inscripcion.png" alt="">
                       </div>
                     </div>
-                    <form class="row" action="{% url 'home' %}" method="POST">
+                    <form class="row" action="{% url 'home' %}" method="POST" enctype="application/x-www-form-urlencoded">
                       {% csrf_token %}
                       <div class="col-12 text-center">
                         <div class="col-6 mx-auto">
@@ -258,7 +258,7 @@
         <!--Banner campeonato nacional-->
         <div class="row mt-3">
             <div class="col text-center">
-              <img class="img-fluid " src="{% static 'web/img/banner_titulo_campeonato.webp' %}" alt="titulo-camp">
+              <img class="img-fluid " src="{% static 'web/img/banner_titulo_campeonato.png' %}" alt="titulo-camp">
             </div>
         </div> 
 
@@ -389,12 +389,12 @@
 
         <div class="row d-flex justify-content-evenly">
           <!--first new-->
-            <div class="col-md-4 noticia mt-5 ">
-                <img class="img-fluid" src="{{ first_noticia.imagenEncabezado.url }}" alt="pareja1">
+            <a class="text-decoration-none text-black col-md-4 noticia mt-5 ">
+                <img class="img-fluid" src="{{ first_noticia.imagenPreview.url }}" alt="pareja1">
                 <h2 class="fw-bold m-0">{{first_noticia.titulo}}</h2>
                 <p class="fw-bold">{{first_noticia.fecha}}</p>
                 <p>{{first_noticia.descripcion}}</p>
-            </div>
+            </a>
           <!--end first new-->
           <!--old news-->
           
@@ -402,7 +402,7 @@
               <div class="row">
                 {% for news in old_noticia %}
                 <div class="col-md-6 noticia mt-5">
-                  <img class="img-fluid old_news" src="{{ news.imagenEncabezado.url }}" alt="pareja1">
+                  <img class="img-fluid old_news" src="{{ news.imagenPreview.url }}" alt="pareja1">
                   <h4 class="fw-bold m-0">{{news.titulo}}</h4>
                   <p class="fw-bold">{{news.fecha}}</p>
                   <div class=" d-flex flex-nowrap">
