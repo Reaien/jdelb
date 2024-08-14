@@ -32,7 +32,8 @@
                   <a class="nav-link text-white fw-medium" href="#">Nosotros</a>
                   <a class="nav-link text-white fw-medium" href="#">Organización</a>
                 </div>
-                {% if user.is_superuser %}
+
+                {% if perms.web.add_noticia%}
                 <div>
                   <a class="fw-medium btn btn-warning" href="{% url 'crearNoticia' %}">Crear Noticia para la web</a>
                 </div>
