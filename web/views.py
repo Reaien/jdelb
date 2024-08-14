@@ -5,6 +5,7 @@ from .models import EnVivos, Noticia, Regiones, Votaciones, Campeones, BloqueVot
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.decorators import permission_required
 # Create your views here.
 def home(request):
     regiones = Region.objects.all()
@@ -147,7 +148,7 @@ def home(request):
             subject,
             message,
             settings.DEFAULT_FROM_EMAIL,
-            [mail_destino],
+            [mail_destino, 'director@jdelb.cl'],
             fail_silently=False
         )
         return redirect('home')
@@ -180,6 +181,7 @@ def obtener_comunas(request, region_id):
     comunas = Comuna.objects.filter(region_id=region_id).values('id', 'nombre')
     return JsonResponse(list(comunas), safe=False)
 
+@permission_required('web.add_noticia')
 def crearNoticia(request):
     data = {
         'form': NoticiaForm()
@@ -195,3 +197,10 @@ def crearNoticia(request):
 
 
     return render(request, 'web/crearNoticia.html', data)
+
+def noticia(request, id):
+    listaNoticias = Noticia.objects.all()
+    noticia = Noticia.objects.get(id = id)
+    data = {"noticia" : noticia,
+            "listaNoticias" : listaNoticias}
+    return render(request, 'web/noticia.html', data)

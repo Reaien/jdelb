@@ -1,2 +1,5 @@
 user: manu_admin
 pass: manu8525
+
+user: moderador
+pass: jdelb58mod

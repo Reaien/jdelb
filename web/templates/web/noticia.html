@@ -1,0 +1,38 @@
+{% extends 'web/base.html' %} 
+{% load static %}       
+{% block contenido_body %}
+
+    {% if noticia %}
+    <section class="row d-flex justify-content-evenly mx-5">
+        <div class="col-6">
+            <h1 class="fw-bold my-5">{{noticia.titulo}}</h1>
+            <img class="img-fluid mt-2" src="{{ noticia.imagenPreview.url }}" alt="noticia">
+            <p class="my-5 fw-medium">{{noticia.descripcion}}</p>
+            <p class="my-3">{{noticia.textoNoticia1}}</p>
+            {% if noticia.imagenPrincipal %}
+            <img class="img-fluid my-3" src="{{ noticia.imagenPrincipal.url }}" alt="noticia">
+            {% endif %}
+            <p class="my-3">{{noticia.textoNoticia2}}</p>
+            {% if noticia.imagenSecundaria %}
+            <img class="img-fluid my-3" src="{{ noticia.imagenSecundaria.url }}" alt="noticia">
+            {% endif %}
+            <p>Noticia creada el {{noticia.fecha}}</p>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                {% for news in listaNoticias %}
+                <a class="col-md-6 noticia mt-5 text-black text-decoration-none" href="{% url 'noticia' news.id %}">
+                  <img class="w-50 old_news" src="{{ news.imagenPreview.url }}" alt="pareja1">
+                  <h4 class="fw-bold m-0">{{news.titulo}}</h4>
+                  <p class="fw-bold">{{news.fecha}}</p>
+                  <div class=" d-flex flex-nowrap">
+                    <p>{{news.descripcion}}</p>
+                  </div>
+                </a>
+                {% endfor %}
+              </div>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock %}

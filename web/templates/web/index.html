@@ -123,28 +123,7 @@
             <!-- Button trigger modal -->
 
 
-            <div class="contenedor-carrusel row ">
-              <div id="carouselExampleAutoplaying" class="carousel slide ps-0 pe-0" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <button class="px-0 mx-0 py-0 my-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <img src="{% static 'web/img/banner_inscripcion.webp' %}" class="d-block w-100" alt="...">
-                    </button>
-                  </div>
-                  <div class="carousel-item">
-                    <img src="{% static 'web/img/banner_campeones.png' %}" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-            </div>
+
 
 
 
@@ -389,7 +368,7 @@
 
         <div class="row d-flex justify-content-evenly">
           <!--first new-->
-            <a class="text-decoration-none text-black col-md-4 noticia mt-5 ">
+            <a class="text-decoration-none text-black col-md-4 noticia mt-5" href="{% url 'noticia' first_noticia.id %}">
                 <img class="img-fluid" src="{{ first_noticia.imagenPreview.url }}" alt="pareja1">
                 <h2 class="fw-bold m-0">{{first_noticia.titulo}}</h2>
                 <p class="fw-bold">{{first_noticia.fecha}}</p>
@@ -401,14 +380,14 @@
             <div class="col-sm-12 col-md-5">
               <div class="row">
                 {% for news in old_noticia %}
-                <div class="col-md-6 noticia mt-5">
-                  <img class="img-fluid old_news" src="{{ news.imagenPreview.url }}" alt="pareja1">
+                <a class="col-md-6 noticia mt-5 text-black text-decoration-none" href="{% url 'noticia' news.id %}">
+                  <img class="w-50 old_news" src="{{ news.imagenPreview.url }}" alt="pareja1">
                   <h4 class="fw-bold m-0">{{news.titulo}}</h4>
                   <p class="fw-bold">{{news.fecha}}</p>
                   <div class=" d-flex flex-nowrap">
                     <p>{{news.descripcion}}</p>
                   </div>
-                </div>
+                </a>
                 {% endfor %}
               </div>
             </div>
