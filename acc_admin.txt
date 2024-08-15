@@ -3,3 +3,8 @@ pass: manu8525
 
 user: moderador
 pass: jdelb58mod
+
+cpanel ssh
+
+user: id_rsa
+pass: jdelb58admin
