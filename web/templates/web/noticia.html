@@ -11,8 +11,8 @@
     </div> 
 
     {% if noticia %}
-    <section class="row d-flex justify-content-evenly mx-5">
-        <div class="col-6">
+    <section class="row d-flex justify-content-evenly ">
+        <div class="col-12 col-md-6">
             <h1 class="fw-bold my-5">{{noticia.titulo}}</h1>
             <img class="img-fluid w-75 mt-2" src="{{ noticia.imagenPreview.url }}" alt="noticia">
             <p class="my-5 fw-medium">{{noticia.descripcion}}</p>
@@ -26,7 +26,7 @@
             {% endif %}
             <p>Noticia creada el {{noticia.fecha}}</p>
         </div>
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="row">
                 {% for news in listaNoticias %}
                 <a class="col-md-6 noticia mt-5 text-black text-decoration-none" href="{% url 'noticia' news.id %}">
