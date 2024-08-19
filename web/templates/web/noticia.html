@@ -2,11 +2,19 @@
 {% load static %}       
 {% block contenido_body %}
 
+    <div class="row mt-5 pt-4 mb-3">
+      <div class="contenedor-titulo h-auto d-inline-block ">
+        <div class="col text-center">
+          <img class="img-fluid " src="{% static 'web/img/noticias_banner.png' %}" alt="event-camp">
+        </div>
+      </div>
+    </div> 
+
     {% if noticia %}
     <section class="row d-flex justify-content-evenly mx-5">
         <div class="col-6">
             <h1 class="fw-bold my-5">{{noticia.titulo}}</h1>
-            <img class="img-fluid mt-2" src="{{ noticia.imagenPreview.url }}" alt="noticia">
+            <img class="img-fluid w-75 mt-2" src="{{ noticia.imagenPreview.url }}" alt="noticia">
             <p class="my-5 fw-medium">{{noticia.descripcion}}</p>
             <p class="my-3">{{noticia.textoNoticia1}}</p>
             {% if noticia.imagenPrincipal %}
@@ -23,7 +31,7 @@
                 {% for news in listaNoticias %}
                 <a class="col-md-6 noticia mt-5 text-black text-decoration-none" href="{% url 'noticia' news.id %}">
                   <img class="w-50 old_news" src="{{ news.imagenPreview.url }}" alt="pareja1">
-                  <h4 class="fw-bold m-0">{{news.titulo}}</h4>
+                  <h4 class="fw-semibold m-0">{{news.titulo}}</h4>
                   <p class="fw-bold">{{news.fecha}}</p>
                   <div class=" d-flex flex-nowrap">
                     <p>{{news.descripcion}}</p>
