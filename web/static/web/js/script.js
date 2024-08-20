@@ -32,38 +32,7 @@ observer.observe(idChile);
 observer.observe(idPareja);
 //end observer pareja
 
-//script animación rut
-document.addEventListener('DOMContentLoaded', function() {
-    const rutInput = document.getElementById('rut');
-    if (rutInput) {
-        rutInput.addEventListener('input', function (event) {
-            let rut = event.target.value.replace(/\D/g, ''); // Elimina todos los caracteres que no sean dígitos
-            let formattedRut = '';
 
-            if (rut.length > 1) {
-                formattedRut = rut.slice(-1); // Extrae el dígito verificador
-                rut = rut.slice(0, -1); // Elimina el dígito verificador del RUT
-            }
-
-            if (rut.length > 3) {
-                formattedRut = rut.slice(-3) + '-' + formattedRut;
-                rut = rut.slice(0, -3);
-            }
-
-            while (rut.length > 3) {
-                formattedRut = rut.slice(-3) + '.' + formattedRut;
-                rut = rut.slice(0, -3);
-            }
-
-            if (rut.length > 0) {
-                formattedRut = rut + '.' + formattedRut;
-            }
-
-            event.target.value = formattedRut;
-        });
-    }
-
-});
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -91,4 +60,19 @@ document.addEventListener('DOMContentLoaded', function() {
             comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
         }
     });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fonoInput = document.getElementById('fono_bailarina');
+    if (fonoInput) {
+        fonoInput.addEventListener('input', function(event) {
+            let value = event.target.value.replace(/\D/g, ''); // Elimina todos los caracteres no numéricos
+            if (value.length > 9) {
+                value = value.slice(0, 9); // Limita a 9 dígitos
+            }
+            event.target.value = value;
+            event.target.setCustomValidity(value.length === 9 ? "" : "Debe tener exactamente 9 dígitos");
+        });
+    }
 });

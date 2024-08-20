@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quattrocento&display=swap" rel="stylesheet">
@@ -79,116 +79,6 @@
 
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-12 text-center">
-                        <img src="/web/static/web/img/banner-inscripcion.png" alt="">
-                      </div>
-                    </div>
-                    <form class="row" action="{% url 'home' %}" method="POST" enctype="application/x-www-form-urlencoded">
-                      {% csrf_token %}
-                      <div class="col-12 text-center">
-                        <div class="col-6 mx-auto">
-                          <h4 class="text-center">
-                            Representación
-                          </h4>
-                          <div class="mb-3">
-                            <label for="region_inscripcion" class="form-label">Región</label>
-                            <select class="form-select" id="region_inscripcion" name="region_inscripcion">
-                                <option value="">Selecciona una región</option>
-                                {% for region in regiones %}
-                                    <option value="{{ region.id }}">{{ region.nombre }}</option>
-                                {% endfor %}
-                            </select>
-                          </div>
-                          <div class="mb-3">
-                            <label for="comuna_inscripcion" class="form-label">Comuna</label>
-                            <select class="form-select" id="comuna_inscripcion" name="comuna_inscripcion">
-                                <option value="">Selecciona una comuna</option>
-                            </select>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div class="col-6">
-                        <h4 class="text-center">
-                          Datos de la bailarina
-                        </h4>
-                        <div class="mb-3 form-check">
-                          <label for="nombre" class="form-label">Nombre</label>
-                          <input type="text" name="nombre_bailarina" placeholder="Nombre Completo Bailarina" class="form-control" id="nombre" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="edad_bailarina" class="form-label">Edad</label>
-                          <input type="number" id="edad_bailarina" class="form-control" name="edad_bailarina" min="0" max="99" placeholder="Ingresa tu edad" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fecha_nacimiento_bailarina" class="form-label">Fecha de nacimiento</label>
-                          <input type="date" name="fecha_nacimiento_bailarina" class="form-control" id="fecha_nacimiento_bailarina" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="rut_bailarina" class="form-label">Rut</label>
-                          <input type="text" class="form-control" id="rut_bailarina" name="rut_bailarina" maxlength="12" placeholder="Ej: x.xxx.xxx-x" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="email_bailarina" class="form-label">Correo Electronico</label>
-                          <input type="email" id="email_bailarina" name="email_bailarina" class="form-control" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fono_bailarina" class="form-label">Telefono de contacto</label>
-                          <input type="number" id="fono_bailarina" min="0" name="fono_bailarina" placeholder="Ej: 9 5852 5454" class="form-control" required>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <h4 class="text-center">
-                          Datos del bailarín
-                        </h4>
-                        <div class="mb-3 form-check">
-                          <label for="nombre_bailarin" class="form-label">Nombre</label>
-                          <input type="text" name="nombre_bailarin" placeholder="Nombre Completo Bailarín" class="form-control" id="nombre_bailarin" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="edad_bailarin" class="form-label">Edad</label>
-                          <input type="number" id="edad_bailarin" class="form-control" name="edad_bailarin" min="0" max="99" placeholder="Ingresa tu edad" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fecha_nacimiento_bailarin" class="form-label">Fecha de nacimiento</label>
-                          <input type="date" name="fecha_nacimiento_bailarin" class="form-control" id="fecha_nacimiento_bailarin" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="rut_bailarin" class="form-label">Rut</label>
-                          <input type="text" id="rut" class="form-control" name="rut_bailarin" maxlength="12" placeholder="Ej: x.xxx.xxx-x" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="email_bailarin" class="form-label">Correo Electronico</label>
-                          <input type="email" name="email_bailarin" class="form-control" id="email_bailarin" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fono_bailarin" class="form-label">Telefono de contacto</label>
-                          <input type="number" min="0" name="fono_bailarin" placeholder="Ej: 9 5852 5454" class="form-control" id="fono_bailarin" required>
-                        </div>
-                      </div>
-                      
-                      <div class="col-6 text-center">
-                        <button type="submit" name="enviar_inscripcion" class="btn btn-warning mt-4 w-50">Enviar inscripción</button>
-                      </div>
-                      
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!--Fin Seccion inscripción-->
-        
-
-
-
         {% block contenido_body %}
         {% endblock %}
 
@@ -237,9 +127,10 @@
         
 
     </div>
+    
+    <script src="{% static 'web/js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
-    <script src="{% static 'web/js/script.js' %}"></script>
     <script src="{% static 'web/js/ajaxResultados.js' %}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -253,5 +144,6 @@
         </script>
         {% endfor %}
     {% endif %}
+    <script src="{% static 'web/js/scriptForm.js' %}"></script>
   </body>
 </html>
