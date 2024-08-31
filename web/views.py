@@ -73,7 +73,7 @@ def home(request):
         elif region.id == 6:
             mail_destino = 'valparaiso@jdelb.cl'
         elif region.id == 7:
-            mail_destino = 'rm@jdelb.cl'
+            mail_destino = 'metropolitana@jdelb.cl'
         elif region.id == 8:
             mail_destino = 'ohiggins@jdelb.cl'
         elif region.id == 9:
