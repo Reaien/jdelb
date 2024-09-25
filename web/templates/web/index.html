@@ -1,420 +1,456 @@
-{% extends 'web/base.html' %} 
-{% load static %}       
+{% extends 'web/base.html' %}
+{% load static %}
 {% block contenido_body %}
 
-      
 
 
-      <!--Seccion live-->
-      {% if en_vivo.activar_en_vivo %}
-        <section class="row mt-3 ">
+
+<!--Seccion live-->
+{% if en_vivo.activar_en_vivo %}
+<section class="row mt-3 ">
+  <div class="col-12">
+    <div class="text-center">
+      <img class="img-fluid mb-5 mt-5" src="{% static 'web/img/titulo_campeonato_vivo.webp'%}" alt="logo">
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-5 mx-auto">
+    <div class="ratio ratio-16x9 ">
+
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        width="1280" title="Transmisión Oficial Campeonato Nacional Jovenes del Bicentenario" height="720"
+        src="{{en_vivo.link_transmision}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+  {% if bloque_votacion.activar_votaciones %}
+  <div id="col-votaciones" class="col-xs-4 col-md-4 col-xl-3">
+    <form method="POST" action="{% url 'home' %}" enctype="application/x-www-form-urlencoded">
+      <div class="card rounded fondo-card-votacion votacion-card-body">
+        <div class="card-body ">
+          <h3 class="card-title text-center titulo-card fw-bold">Vota por tu pareja favorita</h3>
+          <div class="text-center">
+            {% csrf_token %}
+            {% for info_regiones in info_regiones %}
+            <div class="row d-flex align-items-center mb-4 rounded-pill pb-5">
+              <div class="col-12 text-center">
+                <h2 name="region_nombre" value="{{info_regiones.nombreRegion}}" class="titulo-region-votacion fw-bold">
+                  {{info_regiones.nombreRegion}}</h2>
+              </div>
+              <div class="col-6 ps-0 pe-0 text-center">
+                {% if info_regiones.fotoCompetidora %}
+                <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle"
+                  src="{{info_regiones.fotoCompetidora.url}}" alt="competidora">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
+              </div>
+              <div class="col-6 ps-0 pe-0 text-center">
+                {% if info_regiones.fotoCompetidor %}
+                <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle"
+                  src="{{info_regiones.fotoCompetidor.url}}" alt="competidor">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-center text-center">
+                <button type="submit" name="region_id" value="{{info_regiones.id}}"
+                  class="fw-bold btn btn-warning mt-4 w-50 mb-5">Votar por la pareja de
+                  {{info_regiones.nombreRegion}}</button>
+              </div>
+            </div>
+            {% endfor %}
+
+
+            {% for info_region_magallanes in info_region_magallanes %}
+            <div class="row d-flex align-items-center mb-4 rounded-pill pb-5">
+              <div class="col-12 text-center">
+                <h2 class="titulo-region-votacion fw-bold">{{info_region_magallanes.nombreRegion}}</h2>
+              </div>
+              <div class="col-6 ps-0 pe-0 text-center">
+                {% if info_region_magallanes.fotoCompetidora %}
+                <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle"
+                  src="{{info_region_magallanes.fotoCompetidora.url}}" alt="competidora">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidora}}</p>
+              </div>
+              <div class="col-6 ps-0 pe-0 text-center">
+                {% if info_region_magallanes.fotoCompetidor %}
+                <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle"
+                  src="{{info_region_magallanes.fotoCompetidor.url}}" alt="competidor">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidor}}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-center text-center">
+                <button type="submit" name="region_id" value="{{info_region_magallanes.id}}"
+                  class="fw-bold btn btn-warning mt-4 w-50 mb-5">Votar por la pareja de
+                  {{info_region_magallanes.nombreRegion}}</button>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-7 col-xl-4 d-flex justify-content-center align-items-center borde-resultado">
+    <div class="card border border-0 fondo-card-resultado">
+      <h3 class="card-title text-center titulo-card fw-bold">Resultados</h3>
+      <img class="img-fluid fondo-card" src="{% static 'web/img/borde-flores.png' %}" alt="borde-flores">
+      <div id="tabla-resultados" class="card-body card-resultado">
+        {% for resultados_votos in resultados_votos %}
+        <div class="row fila-resultados">
+          <div class="col-md-12 text-center">
+            <h5 name="region_nombre" class="titulo-region-votacion-resultados fw-bold">{{resultados_votos.nombreRegion}}
+            </h5>
+          </div>
           <div class="col-12">
-            <div class="text-center">
-                <img class="img-fluid mb-5 mt-5" src="{% static 'web/img/titulo_campeonato_vivo.webp'%}" alt="logo">
+            <div class="col-md-6 ps-0 pe-0 text-center ">
+              {% if resultados_votos.fotoCompetidora %}
+              <img class="rounded-4 img-fluid w-75 border border-5" src="{{resultados_votos.fotoCompetidora.url}}"
+                alt="competidora">
+              {% endif %}
+              <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidora}}</p>
             </div>
-          </div>
-          <div class="col-md-6 col-xl-5 mx-auto">
-            <div class="ratio ratio-16x9 ">
-              
-              <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  width="1280" title="Transmisión Oficial Campeonato Nacional Jovenes del Bicentenario" height="720" src="{{en_vivo.link_transmision}}" frameborder="0" allowfullscreen></iframe>
+            <div class="col-md-6 ps-0 pe-0 text-center">
+              {% if resultados_votos.fotoCompetidor %}
+              <img class="rounded-4 img-fluid w-75 border border-5" src="{{resultados_votos.fotoCompetidor.url}}"
+                alt="competidora">
+              {% endif %}
+              <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidor}}</p>
             </div>
-          </div>
-          {% if bloque_votacion.activar_votaciones %}
-          <div id="col-votaciones" class="col-xs-4 col-md-4 col-xl-3">
-            <form method="POST" action="{% url 'home' %}" enctype="application/x-www-form-urlencoded">
-              <div class="card rounded fondo-card-votacion votacion-card-body">
-                <div class="card-body ">
-                  <h3 class="card-title text-center titulo-card fw-bold">Vota por tu pareja favorita</h3>
-                  <div class="text-center">
-                    {% csrf_token %}
-                    {% for info_regiones in info_regiones %}
-                    <div class="row d-flex align-items-center mb-4 rounded-pill pb-5">
-                      <div class="col-12 text-center">
-                        <h2 name="region_nombre" value="{{info_regiones.nombreRegion}}" class="titulo-region-votacion fw-bold">{{info_regiones.nombreRegion}}</h2>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        {% if info_regiones.fotoCompetidora %}
-                        <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_regiones.fotoCompetidora.url}}" alt="competidora">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        {% if info_regiones.fotoCompetidor %}
-                        <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_regiones.fotoCompetidor.url}}" alt="competidor">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-center text-center">
-                        <button type="submit" name="region_id" value="{{info_regiones.id}}" class="fw-bold btn btn-warning mt-4 w-50 mb-5">Votar por la pareja de {{info_regiones.nombreRegion}}</button>
-                      </div>
-                    </div>
-                    {% endfor %}
-
-                    
-                    {% for info_region_magallanes in info_region_magallanes %}
-                    <div class="row d-flex align-items-center mb-4 rounded-pill pb-5">
-                      <div class="col-12 text-center">
-                        <h2 class="titulo-region-votacion fw-bold">{{info_region_magallanes.nombreRegion}}</h2>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        {% if info_region_magallanes.fotoCompetidora %}
-                        <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_region_magallanes.fotoCompetidora.url}}" alt="competidora">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidora}}</p>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        {% if info_region_magallanes.fotoCompetidor %}
-                        <img class="rounded-circle img-fluid w-50 border border-5 border-danger-subtle" src="{{info_region_magallanes.fotoCompetidor.url}}" alt="competidor">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidor}}</p>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-center text-center">
-                        <button type="submit" name="region_id" value="{{info_region_magallanes.id}}" class="fw-bold btn btn-warning mt-4 w-50 mb-5">Votar por la pareja de {{info_region_magallanes.nombreRegion}}</button>
-                      </div>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-            </form>  
-          </div>
-
-          <div class="col-md-7 col-xl-4 d-flex justify-content-center align-items-center borde-resultado">
-            <div class="card border border-0 fondo-card-resultado">
-              <h3 class="card-title text-center titulo-card fw-bold">Resultados</h3>
-              <img class="img-fluid fondo-card" src="{% static 'web/img/borde-flores.png' %}" alt="borde-flores">
-              <div id="tabla-resultados" class="card-body card-resultado">
-                {% for resultados_votos in resultados_votos %}
-                <div class="row fila-resultados">
-                  <div class="col-md-12 text-center">
-                    <h5 name="region_nombre" class="titulo-region-votacion-resultados fw-bold">{{resultados_votos.nombreRegion}}</h5>
-                  </div>
-                  <div class="col-12">
-                    <div class="col-md-6 ps-0 pe-0 text-center ">
-                      {% if resultados_votos.fotoCompetidora %}
-                      <img class="rounded-4 img-fluid w-75 border border-5" src="{{resultados_votos.fotoCompetidora.url}}" alt="competidora">
-                      {% endif %}
-                      <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidora}}</p>
-                    </div>
-                    <div class="col-md-6 ps-0 pe-0 text-center">
-                      {% if resultados_votos.fotoCompetidor %}
-                      <img class="rounded-4 img-fluid w-75 border border-5" src="{{resultados_votos.fotoCompetidor.url}}" alt="competidora">
-                      {% endif %}
-                      <p class="fw-bold mt-1 nombre-competidor-resultados">{{resultados_votos.nombreCompletoCompetidor}}</p>
-                    </div>
-                    <div class="col-4 d-flex align-items-center">
-                      <p class="fw-bold mt-1 ms-1 nombre-competidor-resultados">Votos: {{resultados_votos.votos}}</p>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </section> 
-        {% endif %}
-        <!--Seccion live-->
-        {% endif %}
-
-
-        <!--Seccion inscripción-->
-        <section>
-          <div>
-            <!-- Button trigger modal -->
-
-
-
-
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-12 text-center">
-                        <img src="/web/static/web/img/banner-inscripcion.png" alt="">
-                      </div>
-                    </div>
-                    <form class="row" action="{% url 'home' %}" method="POST" enctype="application/x-www-form-urlencoded">
-                      {% csrf_token %}
-                      <div class="col-12 text-center">
-                        <div class="col-6 mx-auto">
-                          <h4 class="text-center">
-                            Representación
-                          </h4>
-                          <div class="mb-3">
-                            <label for="region_inscripcion" class="form-label">Región</label>
-                            <select class="form-select" id="region_inscripcion" name="region_inscripcion">
-                                <option value="">Selecciona una región</option>
-                                {% for region in regiones %}
-                                    <option value="{{ region.id }}">{{ region.nombre }}</option>
-                                {% endfor %}
-                            </select>
-                          </div>
-                          <div class="mb-3">
-                            <label for="comuna_inscripcion" class="form-label">Comuna</label>
-                            <select class="form-select" id="comuna_inscripcion" name="comuna_inscripcion">
-                                <option value="">Selecciona una comuna</option>
-                            </select>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div class="col-6">
-                        <h4 class="text-center">
-                          Datos de la bailarina
-                        </h4>
-                        <div class="mb-3 form-check">
-                          <label for="nombre" class="form-label">Nombre</label>
-                          <input type="text" name="nombre_bailarina" placeholder="Nombre Completo Bailarina" class="form-control" id="nombre" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="edad_bailarina" class="form-label">Edad</label>
-                          <input type="number" id="edad_bailarina" class="form-control" name="edad_bailarina" min="14" max="18" placeholder="Ingresa tu edad" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fecha_nacimiento_bailarina" class="form-label">Fecha de nacimiento</label>
-                          <input type="date" name="fecha_nacimiento_bailarina" class="form-control" id="fecha_nacimiento_bailarina" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="rut_bailarina" class="form-label">Rut</label>
-                          <input type="text" class="form-control run" name="rut_bailarina" maxlength="12" placeholder="Ej: x.xxx.xxx-x" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="email_bailarina" class="form-label">Correo Electronico</label>
-                          <input type="email" id="email_bailarina" name="email_bailarina" class="form-control" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fono_bailarina" class="form-label">Telefono de contacto</label>
-                          <input type="text" id="fono_bailarina" name="fono_bailarina" placeholder="Ej: 958525454" class="form-control" maxlength="9" pattern="\d{9}" required title="Debe tener exactamente 9 dígitos">
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <h4 class="text-center">
-                          Datos del bailarín
-                        </h4>
-                        <div class="mb-3 form-check">
-                          <label for="nombre_bailarin" class="form-label">Nombre</label>
-                          <input type="text" name="nombre_bailarin" placeholder="Nombre Completo Bailarín" class="form-control" id="nombre_bailarin" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="edad_bailarin" class="form-label">Edad</label>
-                          <input type="number" id="edad_bailarin" class="form-control" name="edad_bailarin" min="14" max="18" placeholder="Ingresa tu edad" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fecha_nacimiento_bailarin" class="form-label">Fecha de nacimiento</label>
-                          <input type="date" name="fecha_nacimiento_bailarin" class="form-control" id="fecha_nacimiento_bailarin" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="rut_bailarin" class="form-label">Rut</label>
-                          <input type="text" class="form-control run" name="rut_bailarin" maxlength="12" placeholder="Ej: x.xxx.xxx-x" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="email_bailarin" class="form-label">Correo Electronico</label>
-                          <input type="email" name="email_bailarin" class="form-control" id="email_bailarin" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                          <label for="fono_bailarin" class="form-label">Telefono de contacto</label>
-                          <input type="text" id="fono_bailarina" name="fono_bailarina" placeholder="Ej: 958525454" class="form-control" maxlength="9" pattern="\d{9}" required title="Debe tener exactamente 9 dígitos">
-                        </div>
-                      </div>
-                      
-                      <div class="col-6 text-center">
-                        <button type="submit" name="enviar_inscripcion" class="btn btn-warning mt-4 w-50">Enviar inscripción</button>
-                      </div>
-                      
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!--Fin Seccion inscripción-->
-
-        <!--Banner campeonato nacional-->
-        <div class="row mt-3">
-            <div class="col text-center">
-              <img class="img-fluid " src="{% static 'web/img/banner_titulo_campeonato.png' %}" alt="titulo-camp">
-            </div>
-        </div> 
-
-
-        <!--seccion pais y campeones-->
-        <section class="container">
-         <div class="row d-flex justify-content-center align-items-center">
-            <div id="pais_chile" class="col-md-6">
-                {% for info_regiones in info_regiones %}
-                <a class="row justify-content-center align-items-center animacion_region text-center">
-                    <img id="arica" class=" region img-fluid" src="{{ info_regiones.imagenRegion.url }}" alt="arica"  data-bs-toggle="modal" data-bs-target="#miModal{{info_regiones.pk}}">
-                </a>
-                {% endfor %}
-                {% for info_region_magallanes in info_region_magallanes %}
-                <a class="row justify-content-center align-items-center animacion_region text-center">
-                    <img id="magallanes" class="region img-fluid" src="{{ info_region_magallanes.imagenRegion.url }}" alt="magallanes"  data-bs-toggle="modal" data-bs-target="#miModalMagallanes{{info_region_magallanes.pk}}">
-                </a>
-                {% endfor %}
-            </div>
-            <div id="col-pareja-card" class="col-xs-12 col-md-6 mt-5">
-              <!--cuequeros campeones-->
-              <div id="cuequeros" class="text-center">
-                <img class="img-fluid w-75" src="{{last_campeones.foto_campeones.url}}" alt="">
-                <div class="ms-2 mt-3">
-                  <h6 class="fst-italic">{{last_campeones.nombre_pareja}}</h6>
-                  <h5 class="fst-italic">Campeones Nacionales - {{last_campeones.anno_campeon}}</h5>
-                </div>
-              </div>
-              <!-- fin cuequeros campeones-->
-            </div>
-         </div>
-        </section>
-
-        <!--card de delegados y parejas-->
-        {% for info_regiones in info_regiones %}
-        <div class="mt-5 pt-2 modal fade" id="miModal{{info_regiones.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body">
-                <div class="card slide-in-fwd-center ">
-                  <div class="card-body bg-light bg-gradient">
-                    <div class="row ">
-                      <div class="col-12 text-center">
-                        <h4 class="fw-bold">Delegado Regional</h4>
-                        <h5 class="text-warning fw-bold">{{info_regiones.nombreRegion}}</h5>
-                        {% if info_regiones.fotoDelegado %}
-                        <img class="rounded-circle img-fluid w-25" src="{{info_regiones.fotoDelegado.url}}" alt="delegado">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoDelegado}}</p>
-                        <p class="fw-bold">{{info_regiones.correoDelegado}}</p>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        <h5 class="fw-bold">Campeona <span class="text-warning">Regional</span></h5>
-                        {% if info_regiones.fotoCompetidora %}
-                        <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidora.url}}" alt="delegado">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        <h5 class="fw-bold">Campeón <span class="text-warning">Regional</span></h5>
-                        {% if info_regiones.fotoCompetidor %}
-                        <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidor.url}}" alt="delegado">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="col-4 d-flex align-items-center">
+              <p class="fw-bold mt-1 ms-1 nombre-competidor-resultados">Votos: {{resultados_votos.votos}}</p>
             </div>
           </div>
         </div>
         {% endfor %}
-        {% for info_region_magallanes in info_region_magallanes %}
-        <div class="mt-5 pt-2 modal fade" id="miModalMagallanes{{info_region_magallanes.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body">
-                <div class="card slide-in-fwd-center ">
-                  <div class="card-body bg-light bg-gradient">
-                    <div class="row ">
-                      <div class="col-12 text-center">
-                        <h4 class="fw-bold">Delegado Regional</h4>
-                        <h5 class="text-warning fw-bold">{{info_region_magallanes.nombreRegion}}</h5>
-                        {% if info_region_magallanes.fotoDelegado %}
-                        <img class="rounded-circle img-fluid w-25" src="{{info_region_magallanes.fotoDelegado.url}}" alt="delegado">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoDelegado}}</p>
-                        <p class="fw-bold">{{info_region_magallanes.correoDelegado}}</p>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        <h5 class="fw-bold">Campeona <span class="text-warning">Regional</span></h5>
-                        {% if info_region_magallanes.fotoCompetidora %}
-                        <img class="rounded-circle img-fluid w-50" src="{{info_region_magallanes.fotoCompetidora.url}}" alt="delegado">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidora}}</p>
-                      </div>
-                      <div class="col-6 ps-0 pe-0 text-center">
-                        <h5 class="fw-bold">Campeón <span class="text-warning">Regional</span></h5>
-                        {% if info_region_magallanes.fotoCompetidor %}
-                        <img class="rounded-circle img-fluid w-50" src="{{info_region_magallanes.fotoCompetidor.url}}" alt="delegado">
-                        {% endif %}
-                        <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidor}}</p>
-                      </div>
-                    </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+<!--Seccion live-->
+{% endif %}
+
+
+<!--Seccion inscripción-->
+<section>
+  <div>
+    <!-- Button trigger modal -->
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 text-center">
+                <img src="/web/static/web/img/banner-inscripcion.png" alt="">
+              </div>
+            </div>
+            <form class="row" action="{% url 'home' %}" method="POST" enctype="application/x-www-form-urlencoded">
+              {% csrf_token %}
+              <div class="col-12 text-center">
+                <div class="col-6 mx-auto">
+                  <h4 class="text-center">
+                    Representación
+                  </h4>
+                  <div class="mb-3">
+                    <label for="region_inscripcion" class="form-label">Región</label>
+                    <select class="form-select" id="region_inscripcion" name="region_inscripcion">
+                      <option value="">Selecciona una región</option>
+                      {% for region in regiones %}
+                      <option value="{{ region.id }}">{{ region.nombre }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="comuna_inscripcion" class="form-label">Comuna</label>
+                    <select class="form-select" id="comuna_inscripcion" name="comuna_inscripcion">
+                      <option value="">Selecciona una comuna</option>
+                    </select>
                   </div>
                 </div>
+
+              </div>
+              <div class="col-6">
+                <h4 class="text-center">
+                  Datos de la bailarina
+                </h4>
+                <div class="mb-3 form-check">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" name="nombre_bailarina" placeholder="Nombre Completo Bailarina"
+                    class="form-control" id="nombre" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="edad_bailarina" class="form-label">Edad</label>
+                  <input type="number" id="edad_bailarina" class="form-control" name="edad_bailarina" min="14" max="18"
+                    placeholder="Ingresa tu edad" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="fecha_nacimiento_bailarina" class="form-label">Fecha de nacimiento</label>
+                  <input type="date" name="fecha_nacimiento_bailarina" class="form-control"
+                    id="fecha_nacimiento_bailarina" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="rut_bailarina" class="form-label">Rut</label>
+                  <input type="text" class="form-control run" name="rut_bailarina" maxlength="12"
+                    placeholder="Ej: x.xxx.xxx-x" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="email_bailarina" class="form-label">Correo Electronico</label>
+                  <input type="email" id="email_bailarina" name="email_bailarina" class="form-control" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="fono_bailarina" class="form-label">Telefono de contacto</label>
+                  <input type="text" id="fono_bailarina" name="fono_bailarina" placeholder="Ej: 958525454"
+                    class="form-control" maxlength="9" pattern="\d{9}" required
+                    title="Debe tener exactamente 9 dígitos">
+                </div>
+              </div>
+              <div class="col-6">
+                <h4 class="text-center">
+                  Datos del bailarín
+                </h4>
+                <div class="mb-3 form-check">
+                  <label for="nombre_bailarin" class="form-label">Nombre</label>
+                  <input type="text" name="nombre_bailarin" placeholder="Nombre Completo Bailarín" class="form-control"
+                    id="nombre_bailarin" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="edad_bailarin" class="form-label">Edad</label>
+                  <input type="number" id="edad_bailarin" class="form-control" name="edad_bailarin" min="14" max="18"
+                    placeholder="Ingresa tu edad" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="fecha_nacimiento_bailarin" class="form-label">Fecha de nacimiento</label>
+                  <input type="date" name="fecha_nacimiento_bailarin" class="form-control"
+                    id="fecha_nacimiento_bailarin" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="rut_bailarin" class="form-label">Rut</label>
+                  <input type="text" class="form-control run" name="rut_bailarin" maxlength="12"
+                    placeholder="Ej: x.xxx.xxx-x" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="email_bailarin" class="form-label">Correo Electronico</label>
+                  <input type="email" name="email_bailarin" class="form-control" id="email_bailarin" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <label for="fono_bailarin" class="form-label">Telefono de contacto</label>
+                  <input type="text" id="fono_bailarina" name="fono_bailarina" placeholder="Ej: 958525454"
+                    class="form-control" maxlength="9" pattern="\d{9}" required
+                    title="Debe tener exactamente 9 dígitos">
+                </div>
+              </div>
+
+              <div class="col-6 text-center">
+                <button type="submit" name="enviar_inscripcion" class="btn btn-warning mt-4 w-50">Enviar
+                  inscripción</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Fin Seccion inscripción-->
+
+<!--Banner campeonato nacional-->
+<div class="row mt-3">
+  <div class="col text-center">
+    <img class="img-fluid " src="{% static 'web/img/banner_titulo_campeonato.png' %}" alt="titulo-camp">
+  </div>
+</div>
+
+
+<!--seccion pais y campeones-->
+<section class="container">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div id="pais_chile" class="col-md-6">
+      {% for info_regiones in info_regiones %}
+      <a class="row justify-content-center align-items-center animacion_region text-center">
+        <img id="arica" class=" region img-fluid" src="{{ info_regiones.imagenRegion.url }}" alt="arica"
+          data-bs-toggle="modal" data-bs-target="#miModal{{info_regiones.pk}}">
+      </a>
+      {% endfor %}
+      {% for info_region_magallanes in info_region_magallanes %}
+      <a class="row justify-content-center align-items-center animacion_region text-center">
+        <img id="magallanes" class="region img-fluid" src="{{ info_region_magallanes.imagenRegion.url }}"
+          alt="magallanes" data-bs-toggle="modal" data-bs-target="#miModalMagallanes{{info_region_magallanes.pk}}">
+      </a>
+      {% endfor %}
+    </div>
+    <div id="col-pareja-card" class="col-xs-12 col-md-6 mt-5">
+      <!--cuequeros campeones-->
+      <div id="cuequeros" class="text-center">
+        <img class="img-fluid w-75" src="{{last_campeones.foto_campeones.url}}" alt="">
+        <div class="ms-2 mt-3">
+          <h6 class="fst-italic">{{last_campeones.nombre_pareja}}</h6>
+          <h5 class="fst-italic">Campeones Nacionales - {{last_campeones.anno_campeon}}</h5>
+        </div>
+      </div>
+      <!-- fin cuequeros campeones-->
+    </div>
+  </div>
+</section>
+
+<!--card de delegados y parejas-->
+{% for info_regiones in info_regiones %}
+<div class="mt-5 pt-2 modal fade" id="miModal{{info_regiones.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card slide-in-fwd-center ">
+          <div class="card-body bg-light bg-gradient">
+            <div class="row ">
+              <div class="col-12 text-center">
+                <h4 class="fw-bold">Delegado Regional</h4>
+                <h5 class="text-warning fw-bold">{{info_regiones.nombreRegion}}</h5>
+                {% if info_regiones.fotoDelegado %}
+                <img class="rounded-circle img-fluid w-25" src="{{info_regiones.fotoDelegado.url}}" alt="delegado">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_regiones.nombreCompletoDelegado}}</p>
+                <p class="fw-bold">{{info_regiones.correoDelegado}}</p>
+              </div>
+              <div class="col-6 ps-0 pe-0 text-center">
+                <h5 class="fw-bold">Campeona <span class="text-warning">Regional</span></h5>
+                {% if info_regiones.fotoCompetidora %}
+                <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidora.url}}" alt="delegado">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidora}}</p>
+              </div>
+              <div class="col-6 ps-0 pe-0 text-center">
+                <h5 class="fw-bold">Campeón <span class="text-warning">Regional</span></h5>
+                {% if info_regiones.fotoCompetidor %}
+                <img class="rounded-circle img-fluid w-50" src="{{info_regiones.fotoCompetidor.url}}" alt="delegado">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_regiones.nombreCompletoCompetidor}}</p>
               </div>
             </div>
           </div>
         </div>
-        {% endfor %}        
-        <!--card de delegados y parejas-->
-
-
-
-
-
-         <!--Banner campeonato nacional-->
-         <div class="row mt-5 pt-4 mb-3">
-             <div class="contenedor-titulo h-auto d-inline-block ">
-               <div class="col text-center">
-                 <img class="img-fluid " src="{% static 'web/img/eventos_campeonato.webp' %}" alt="event-camp">
-               </div>
-             </div>
-         </div> 
-        
-
-        <div class="row d-flex justify-content-evenly">
-          <!--first new-->
-            <a class="text-decoration-none text-black col-md-4 noticia mt-5" href="{% url 'noticia' first_noticia.id %}">
-                <img class="img-fluid" src="{{ first_noticia.imagenPreview.url }}" alt="pareja1">
-                <h2 class="fw-bold m-0">{{first_noticia.titulo}}</h2>
-                <p class="fw-bold">{{first_noticia.fecha}}</p>
-                <p>{{first_noticia.descripcion}}</p>
-            </a>
-          <!--end first new-->
-          <!--old news-->
-          
-            <div class="col-sm-12 col-md-5">
-              <div class="row">
-                {% for news in old_noticia %}
-                <a class="col-md-6 noticia mt-5 text-black text-decoration-none" href="{% url 'noticia' news.id %}">
-                  <img class="w-50 old_news" src="{{ news.imagenPreview.url }}" alt="pareja1">
-                  <h4 class="fw-bold m-0">{{news.titulo}}</h4>
-                  <p class="fw-bold">{{news.fecha}}</p>
-                  <div class=" d-flex flex-nowrap">
-                    <p>{{news.descripcion}}</p>
-                  </div>
-                </a>
-                {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% for info_region_magallanes in info_region_magallanes %}
+<div class="mt-5 pt-2 modal fade" id="miModalMagallanes{{info_region_magallanes.pk}}" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card slide-in-fwd-center ">
+          <div class="card-body bg-light bg-gradient">
+            <div class="row ">
+              <div class="col-12 text-center">
+                <h4 class="fw-bold">Delegado Regional</h4>
+                <h5 class="text-warning fw-bold">{{info_region_magallanes.nombreRegion}}</h5>
+                {% if info_region_magallanes.fotoDelegado %}
+                <img class="rounded-circle img-fluid w-25" src="{{info_region_magallanes.fotoDelegado.url}}"
+                  alt="delegado">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoDelegado}}</p>
+                <p class="fw-bold">{{info_region_magallanes.correoDelegado}}</p>
               </div>
-            </div>
-          <!--end old news-->
-        </div>
-
-
-
-        <!--Banner campeonato bases nacional-->
-        <div class="row mt-5 mb-5">
-            <div class="contenedor-titulo h-auto d-inline-block ">
-              <div class="col text-center">
-                <img class="img-fluid " src="{% static 'web/img/titulo_bases.webp' %}" alt="event-camp" >
+              <div class="col-6 ps-0 pe-0 text-center">
+                <h5 class="fw-bold">Campeona <span class="text-warning">Regional</span></h5>
+                {% if info_region_magallanes.fotoCompetidora %}
+                <img class="rounded-circle img-fluid w-50" src="{{info_region_magallanes.fotoCompetidora.url}}"
+                  alt="delegado">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidora}}</p>
               </div>
-            </div>
-        </div> 
-
-        <section class="container">
-          <div class="row p-0">
-            <div class="col-md-5">
-              <img class="img-fluid" src="{% static 'web/img/pareja_noticias.webp' %}" alt="pareja_bases">
-            </div>
-            <div class="col-md-6 d-flex align-items-center flex-wrap">
-                <p class="fs-3 text-center fst-italic">Conoce las bases del campeonato en nuestro pdf</p>
-                <a class="btn btn-warning" target="_blank" type="button" href="{% static 'web/pdf/BASESNACIONALES2024.pdf' %}" >Ver bases del campeonato</a>
+              <div class="col-6 ps-0 pe-0 text-center">
+                <h5 class="fw-bold">Campeón <span class="text-warning">Regional</span></h5>
+                {% if info_region_magallanes.fotoCompetidor %}
+                <img class="rounded-circle img-fluid w-50" src="{{info_region_magallanes.fotoCompetidor.url}}"
+                  alt="delegado">
+                {% endif %}
+                <p class="fw-bold mt-1">{{info_region_magallanes.nombreCompletoCompetidor}}</p>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<!--card de delegados y parejas-->
+
+
+
+
+
+<!--Banner campeonato nacional-->
+<div class="row mt-5 pt-4 mb-3">
+  <div class="contenedor-titulo h-auto d-inline-block ">
+    <div class="col text-center">
+      <img class="img-fluid " src="{% static 'web/img/eventos_campeonato.webp' %}" alt="event-camp">
+    </div>
+  </div>
+</div>
+
+
+<div class="row d-flex justify-content-evenly">
+  <!--first new-->
+  <a class="text-decoration-none text-black col-md-4 noticia mt-5" href="{% url 'noticia' first_noticia.id %}">
+    <img class="img-fluid" src="{{ first_noticia.imagenPreview.url }}" alt="pareja1">
+    <h2 class="fw-bold m-0">{{first_noticia.titulo}}</h2>
+    <p class="fw-bold">{{first_noticia.fecha}}</p>
+    <p>{{first_noticia.descripcion}}</p>
+  </a>
+  <!--end first new-->
+  <!--old news-->
+
+  <div class="col-sm-12 col-md-5">
+    <div class="row">
+      {% for news in old_noticia %}
+      <a class="col-md-6 noticia mt-5 text-black text-decoration-none" href="{% url 'noticia' news.id %}">
+        <img class="w-50 old_news" src="{{ news.imagenPreview.url }}" alt="pareja1">
+        <h4 class="fw-bold m-0">{{news.titulo}}</h4>
+        <p class="fw-bold">{{news.fecha}}</p>
+        <div class=" d-flex flex-nowrap">
+          <p>{{news.descripcion}}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <!--end old news-->
+</div>
+
+
+
+<!--Banner campeonato bases nacional-->
+<div class="row mt-5 mb-5">
+  <div class="contenedor-titulo h-auto d-inline-block ">
+    <div class="col text-center">
+      <img class="img-fluid " src="{% static 'web/img/titulo_bases.webp' %}" alt="event-camp">
+    </div>
+  </div>
+</div>
+
+<section class="container">
+  <div class="row p-0">
+    <div class="col-md-5">
+      <img class="img-fluid" src="{% static 'web/img/pareja_noticias.webp' %}" alt="pareja_bases">
+    </div>
+    <div class="col-md-6 d-flex align-items-center flex-wrap">
+      <p class="fs-3 text-center fst-italic">Conoce las bases del campeonato en nuestro pdf</p>
+      <a class="btn btn-warning" target="_blank" type="button" href="{% static 'web/pdf/BASESNACIONALES2024.pdf' %}">Ver
+        bases del campeonato</a>
+    </div>
+  </div>
+</section>
 
 {% endblock %}
