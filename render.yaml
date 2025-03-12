@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: jdelb
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn jdelb.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: "4"
